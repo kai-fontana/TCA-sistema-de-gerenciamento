@@ -22,7 +22,7 @@ body {
 .header {
   grid-area: header;
   height: 70px;
-  background-color: #342e57;
+  background-color: #1652a3;
 }
 
 .header nav ul {
@@ -41,7 +41,7 @@ body {
 
 .header nav ul li a {
   display: block;
-  color: #342e57;
+  color: #1652a3;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -52,7 +52,7 @@ body {
 #sidebar {
   grid-area: sidebar;
   height: 100%;
-  background-color: #342e57;
+  background-color: #1652a3;
 
 }
 
@@ -68,7 +68,7 @@ body {
 
 #sidebar h3 a{
   display: block;
-  color: #342e57;
+  color: #1652a3;
   text-decoration: none;
   font-size: 25px;
   margin-left: 20px;
@@ -95,20 +95,20 @@ body {
   flex-wrap: wrap;
   height: 100%;
   width: 100%;
-  background-color: #fdf4e5;
+  background-color: #d5dee7;
   padding: 20px;
 }
 
 .main-container h4{
   font-size: 30px;
-  color: #342e57;
+  color: #1652a3;
   margin-top: 40px;
   margin-bottom: 0px;
   margin-left: 10px;
 }
 
 .titulo-pagina{
-  background-color: #fdf4e5;
+  background-color: #d5dee7;
   border-radius: 20px;
 }
 
@@ -121,7 +121,7 @@ body {
   height: 33%;
   background-color: #ffff;
   padding: 15px;
-  box-shadow: #a1a7ff21 0px 2px 19px 1px, #ac8ae252 0px 2px 7px 1px;
+  box-shadow: #a1d2ff21 0px 2px 19px 1px, #8ab3e252 0px 2px 7px 1px;
   border-radius: 10px;
 }
 
@@ -136,7 +136,7 @@ body {
 }
 
 .titulo-secao h3, .titulo-secao p{
-  color: #837bb9;
+  color: #2f88f5;
 }
 
 .titulo-secao  .header-secao {
