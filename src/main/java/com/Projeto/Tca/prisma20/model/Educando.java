@@ -3,6 +3,7 @@ package com.Projeto.Tca.prisma20.model;
 import lombok.*;
 
 @Data
+@NoArgsConstructor
 public class Educando {
 
     @NonNull
