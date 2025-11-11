@@ -1,11 +1,23 @@
+@font-face {
+  font-family: "Poppins";
+  src: url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap") format("poppins-regular");
+}
+
 html,
 body {
   height: 100%;
+  font-family: Poppins, sans-serif;
 }
 
 body {
   margin: 0;
   padding: 0;
+}
+
+.poppins-regular {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .grid-container {
@@ -29,14 +41,14 @@ body {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  
+
 
 }
 
 .header nav ul li {
   float: left;
   left: 37%;
- 
+
 }
 
 .header nav ul li a {
@@ -66,7 +78,7 @@ body {
 }
 
 
-#sidebar h3 a{
+#sidebar h3 a {
   display: block;
   color: #1652a3;
   text-decoration: none;
@@ -99,7 +111,7 @@ body {
   padding: 20px;
 }
 
-.main-container h4{
+.main-container h4 {
   font-size: 30px;
   color: #1652a3;
   margin-top: 40px;
@@ -107,12 +119,12 @@ body {
   margin-left: 10px;
 }
 
-.titulo-pagina{
+.titulo-pagina {
   background-color: #d5dee7;
   border-radius: 20px;
 }
 
-.titulo-pagina h3 a{
+.titulo-pagina h3 a {
   color: #342e57;
 }
 
@@ -135,11 +147,12 @@ body {
   margin: 70px;
 }
 
-.titulo-secao h3, .titulo-secao p{
+.titulo-secao h3,
+.titulo-secao p {
   color: #2f88f5;
 }
 
-.titulo-secao  .header-secao {
+.titulo-secao .header-secao {
   justify-content: space-between;
 }
 
@@ -187,3 +200,68 @@ padding-left:25px;
 }
 
 */
+
+
+
+/*     CSS DO LOGIN    */
+
+.body-login {
+  background-color: #d5dee7;
+}
+
+.main-login {
+  align-self: center;
+  max-height: 80%;
+  max-width: 60%;
+  min-height: 900px;
+  min-width: 900px;
+  display: flex;
+  padding: 20px;
+  position: relative;
+  top: 3%;
+  bottom: 5%;
+  left: 20%;
+}
+
+.main-login .titulo-container h3 {
+  color: #342e57;
+  font-size: 3rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.main-login .login {
+  display: flex;
+  padding: 30px;
+  background-color: #ffff;
+}
+
+.main-login .titulo-login {
+  padding: 10px;
+  min-height: 30%;
+}
+
+.main-login .login .container {
+  display: flex;
+  flex-direction: column;
+}
+
+.login .container .container.item {
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+.main-login .login .container input {
+
+  background-color: transparent;
+  padding: 8px;
+  border: none;
+  border-bottom: 1px solid #333;
+  margin: 10px 0;
+}
+
+.main-login .titulo-login {
+  padding: 10px;
+  background-color: #1652a3;
+}
