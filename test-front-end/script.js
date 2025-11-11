@@ -1,12 +1,52 @@
-/* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
-function openNav() {
-  document.getElementById("mySidebar").style.width = "250px";
-  document.getElementById("main").style.marginLeft = "250px";
-}
+const chartData1 = {
+    labels: ["Presença", "Falta", "Falta Justificada"],
+    data: [80, 40, 10],
+};
 
-/* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
-function closeNav() {
-  document.getElementById("mySidebar").style.width = "0";
-  document.getElementById("main").style.marginLeft = "0";
-}
+const meuChart1 = document.querySelector(".meu-chart1");
+
+new Chart(meuChart1, {
+    type: "bar",
+    data: {
+        labels: chartData1.labels,
+        datasets: [
+            { 
+                label: "Presença", 
+                minBarLength: 20,
+                data: chartData1.data,
+            },
+        ],
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+
+
+
+
+const chartData2 = {
+    labels: ["Concluído", "Não concluído"],
+    data: [50, 50],
+};
+
+const meuChart2 = document.querySelector(".meu-chart2");
+
+new Chart(meuChart2, {
+    type: "doughnut",
+    data: {
+        labels: chartData2.labels,
+        datasets: [
+            { 
+                label: "Conclusão", 
+                data: chartData2.data,
+            },
+        ],
+    },
+});
 
