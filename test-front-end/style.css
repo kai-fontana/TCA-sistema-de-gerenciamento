@@ -1,66 +1,309 @@
-h1 {
-    color: #fc72de;
+@font-face {
+  font-family: "Poppins";
+  src: url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap") format("poppins-regular");
 }
 
-/* Sidebar menu */
-.sidebar {
-  height: 100%; 
-  width: 0; 
-  position: fixed; 
-  z-index: 1; 
-  top: 0;
-  left: 0;
-  background-color: #203F9A;
-  overflow-x: hidden; 
-  padding-top: 60px; 
-  transition: 0.5s;
+html,
+body {
+  height: 100%;
+  font-family: Poppins, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.poppins-regular {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 260px 1fr 1fr 1fr;
+  grid-template-rows: 0.2fr 3fr;
+  grid-template-areas:
+    "sidebar header header header"
+    "sidebar main main main";
+  height: 100vh;
+
+}
+
+.header {
+  grid-area: header;
+  height: 70px;
+  background-color: #1652a3;
+}
+
+.header nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+
+}
+
+.header nav ul li {
+  float: left;
+  left: 37%;
+
+}
+
+.header nav ul li a {
+  display: block;
+  color: #1652a3;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
 
 
-.sidebar a,.sidebar h3 {
-  padding: 8px 8px 8px 32px;
+
+#sidebar {
+  grid-area: sidebar;
+  height: 100%;
+  background-color: #1652a3;
+
+}
+
+#sidebar a {
+  display: block;
+  color: white;
   text-decoration: none;
   font-size: 25px;
-  color: #EFE8E0;
+  margin-left: 10px;
+
+}
+
+
+#sidebar h3 a {
   display: block;
-  transition: 0.3s;
-}
-
-
-.sidebar a:hover {
-  color: #f1f1f1;
-}
-
-
-.sidebar .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
-}
-
-
-.openbtn {
-  font-size: 20px;
-  cursor: pointer;
-  color: #000000;
+  color: #1652a3;
   text-decoration: none;
+  font-size: 25px;
+  margin-left: 20px;
 
 }
 
-.openbtn:hover {
-  background-color: #e7a0cc;
+#sidebar .text-sumario {
+  margin: 20px;
+
+}
+
+#sidebar h3 {
+  margin: 20px;
+}
+
+#sidebar .text-sumario a {
+  margin-left: 30px;
 }
 
 
-#main {
-  transition: margin-left .5s;
+.main-container {
+  grid-area: main;
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  width: 100%;
+  background-color: #d5dee7;
   padding: 20px;
 }
 
+.main-container h4 {
+  font-size: 30px;
+  color: #1652a3;
+  margin-top: 40px;
+  margin-bottom: 0px;
+  margin-left: 10px;
+}
 
-@media screen and (max-height: 450px) {
-  .sidebar {padding-top: 15px;}
-  .sidebar a {font-size: 18px;}
+.titulo-pagina {
+  background-color: #d5dee7;
+  border-radius: 20px;
+}
+
+.titulo-pagina h3 a {
+  color: #342e57;
+}
+
+.titulo-secao {
+  width: 100%;
+  height: 33%;
+  background-color: #ffff;
+  padding: 15px;
+  box-shadow: #a1d2ff21 0px 2px 19px 1px, #8ab3e252 0px 2px 7px 1px;
+  border-radius: 10px;
+}
+
+.titulo-secao .pagination-secao {
+  max-height: 11%;
+}
+
+.titulo-secao h3 {
+  align-content: center;
+  font-size: 45px;
+  margin: 70px;
+}
+
+.titulo-secao h3,
+.titulo-secao p {
+  color: #2f88f5;
+}
+
+.titulo-secao .header-secao {
+  justify-content: space-between;
+}
+
+
+
+/*     CSS DO LOGIN    */
+
+.body-login {
+  background-color: #d5dee7;
+}
+
+.main-login {
+  align-self: center;
+
+  height: 500px;
+  width: 900px;
+  display: flex;
+  padding: 20px;
+  position: relative;
+  top: 3%;
+  bottom: 5%;
+  left: 20%;
+}
+
+.main-login .titulo-container h3 {
+  color: #082d64;
+  font-size: 3rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.main-login .login {
+  display: flex;
+  padding: 30px;
+  background-color: #ffff;
+}
+
+.main-login .titulo-login {
+  padding: 10px;
+  min-height: 30%;
+}
+
+.main-login .login .container {
+  display: flex;
+  flex-direction: column;
+}
+
+.login .container .container.item {
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+.main-login .login .container input {
+
+  background-color: transparent;
+  padding: 8px;
+  border: none;
+  border-bottom: 1px solid #333;
+  margin: 10px 0;
+}
+
+.main-login .titulo-login {
+  padding: 10px;
+  background-color: #1652a3;
+}
+
+
+
+
+/*  CSS  DA  TABELA  */
+
+.tabela-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #ffff;
+  padding: 20px;
+  border-radius: 3px;
+}
+
+.tabela-usuario {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.tabela-usuario th,
+.tabela-usuario td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.tabela-usuario th {
+  background-color: #f4f4f4;
+}
+
+/*  CSS   DO   CHART  */
+.chart-header {
+  font-family: "Poppins", sans-serif;
+  color: #023027;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 600;
+  text-align:start;
+}
+
+.chart-div1 {
+  height: 500px;
+}
+
+.chart-container {
+  border: none;
+  box-shadow: #a1d2ff21 0px 2px 19px 1px, #20334952 0px 2px 7px 1px;
+  border-radius: 5px;
+  padding: 20px;
+  width: 200px;
+}
+
+.status-curso {
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin: 0 auto;
+}
+
+.titulo-secao-turmas {
+  width: 100%;
+  height: 60%;
+  background-color: #ffff;
+  padding: 15px;
+  box-shadow: #a1d2ff21 0px 2px 19px 1px, #8ab3e252 0px 2px 7px 1px;
+  border-radius: 10px;
+}
+
+.titulo-secao-turmas .pagination-secao {
+  max-height: 11%;
+}
+
+.titulo-secao-turmas h3 {
+  align-content: center;
+  font-size: 45px;
+  margin: 70px;
+}
+
+.titulo-secao-turmas h3,
+.titulo-secao-turmas p {
+  color: #2f88f5;
+}
+
+.titulo-secao-turmas .header-secao {
+  justify-content: space-between;
 }
