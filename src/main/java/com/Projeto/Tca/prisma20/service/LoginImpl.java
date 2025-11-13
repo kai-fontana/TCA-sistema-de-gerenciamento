@@ -12,7 +12,7 @@ public class LoginImpl implements LoginService {
 
 
     @Autowired
-    LoginRepository loginRepository;
+    private LoginRepository loginRepository;
 
 
     @Override
