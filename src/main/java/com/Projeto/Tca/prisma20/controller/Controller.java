@@ -64,9 +64,10 @@ public class Controller {
         String compararSenha = loginReq.getSenhaReq();
 
         if (loginimpl.autenticar(compararEmail, compararSenha)){
-            return "/home";
+            return "redirect:/home";
         } else {
-         return "/login";
+            //model.addAttribute("erroLogin", "E-mail ou senha inválidos.");
+            return "fazer-login";
         }
     }
 
