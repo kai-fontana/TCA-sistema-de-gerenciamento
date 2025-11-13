@@ -6,6 +6,7 @@ public interface LoginService {
 
     public Login salvarLogin(Login login);
 
-    public boolean compararDadosLogin(Login login);
+    public boolean emailExiste(String emailLogin);
 
+    public boolean autenticar(String email, String senha);
 }

@@ -1,7 +1,9 @@
 package com.Projeto.Tca.prisma20.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "cadastro")
 public class Login {

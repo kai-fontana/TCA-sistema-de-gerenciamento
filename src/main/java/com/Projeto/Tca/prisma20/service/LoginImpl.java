@@ -4,6 +4,8 @@ import com.Projeto.Tca.prisma20.model.Login;
 import com.Projeto.Tca.prisma20.repository.LoginRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Optional;
+
 public class LoginImpl implements LoginService {
 
 
@@ -17,8 +19,19 @@ public class LoginImpl implements LoginService {
     }
 
     @Override
-    public boolean compararDadosLogin(Login login) {
-        return loginRepository.equals();
+    public boolean emailExiste(String emailLogin) {
+        return loginRepository.existsByEmail(emailLogin);
+    }
+
+    @Override
+    public boolean autenticar(String email, String senha) {
+        Optional<Login> loginOpt = loginRepository.findByEmail(email);
+
+        if(loginOpt.isPresent()){
+            return senha.equals(loginOpt.get().getSenha());
+        } else {
+            return false;
+        }
     }
 
 
