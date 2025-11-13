@@ -38,15 +38,10 @@ public class LoginController {
             //ra.addFlashAttribute("erroCadastro", "Este e-mail já está cadastrado.");
             return "redirect:/cadastro";
         } else {
-            salvarCadastro(login);
+            loginimpl.salvarLogin(login);
             return "redirect:/login";
         }
 
-    }
-
-
-    private Login salvarCadastro(@ModelAttribute("login") Login login){
-        return loginimpl.salvarLogin(login);
     }
 
 

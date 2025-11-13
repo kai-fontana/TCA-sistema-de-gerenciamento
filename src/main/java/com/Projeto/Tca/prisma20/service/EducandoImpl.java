@@ -14,11 +14,6 @@ public class EducandoImpl implements EducandoService{
     @Autowired
     private EducandoRepository educandoRepository;
 
-    @Override
-    public List<Educando> pegarEducando() {
-        List<Educando> Educando = educandoRepository.findAll();
-        return Educando;
-    }
 
     @Override
     public Educando salvarEducando(Educando educando) {
@@ -26,7 +21,7 @@ public class EducandoImpl implements EducandoService{
     }
 
     @Override
-    public List<Educando> pegarEducandoPorTurma(Turma turma) {
+    public List<Educando> pegarEducandosPorTurma(Turma turma) {
         return educandoRepository.findByTurma(turma);
     }
 }

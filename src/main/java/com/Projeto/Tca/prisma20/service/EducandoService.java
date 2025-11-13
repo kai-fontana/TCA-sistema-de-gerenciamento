@@ -7,11 +7,9 @@ import java.util.List;
 
 public interface EducandoService {
 
-    public List<Educando> pegarEducando();
-
     public Educando salvarEducando (Educando educando);
 
-    public List<Educando> pegarEducandoPorTurma(Turma turma);
+    public List<Educando> pegarEducandosPorTurma(Turma turma);
 
 
 }
