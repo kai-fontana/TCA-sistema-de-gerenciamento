@@ -1,23 +1,20 @@
 package com.Projeto.Tca.prisma20.model;
 
+import jakarta.persistence.*;
 import lombok.*;
 
 @Data
 @NoArgsConstructor
+@Entity
+@Table(name = "educandos")
 public class Educando {
-
-    @NonNull
-    private String nome;
-    @NonNull
-    private int idade;
-    @NonNull
-    private String turma;
-
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-
-    private String cursos;
-
+    private String nome;
+    private int idade;
+    @ManyToOne
+    private Turma turma;
     private String observacoes;
 
 

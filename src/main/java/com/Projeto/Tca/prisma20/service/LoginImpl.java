@@ -3,9 +3,11 @@ package com.Projeto.Tca.prisma20.service;
 import com.Projeto.Tca.prisma20.model.Login;
 import com.Projeto.Tca.prisma20.repository.LoginRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class LoginImpl implements LoginService {
 
 
