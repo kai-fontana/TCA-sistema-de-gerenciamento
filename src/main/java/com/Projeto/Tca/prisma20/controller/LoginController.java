@@ -41,7 +41,6 @@ public class LoginController {
             loginimpl.salvarLogin(login);
             return "redirect:/login";
         }
-
     }
 
 
@@ -68,8 +67,4 @@ public class LoginController {
             return "redirect:/login";
         }
     }
-
-
-
-
 }
