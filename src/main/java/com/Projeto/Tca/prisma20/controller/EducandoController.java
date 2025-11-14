@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/listaEducandos")
@@ -25,10 +24,10 @@ public class EducandoController {
 
         model.addAttribute("listaEducandos",educandoImpl.pegarEducandosPorTurma());
 
-
-   return "listar-educandos";
-
+        return "listar-educandos";
     }
+
+
     @GetMapping("/criarEducando")
     public String criarEducando(Model model){
         Educando educando = new Educando();

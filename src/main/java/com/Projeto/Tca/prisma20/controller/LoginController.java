@@ -22,27 +22,6 @@ public class LoginController {
         return "telaInicial";
     }
 
-    @GetMapping("/cadastro")
-    public String criarLogin(Model model){
-
-        Login login = new Login();
-        model.addAttribute("login",login);
-
-        return "criar-login";
-
-    }
-
-    @PostMapping("/cadastro")
-    public String loginExistente(@ModelAttribute("login") Login login, RedirectAttributes ra){
-        if (loginimpl.emailExiste(login.getEmail())){
-            //ra.addFlashAttribute("erroCadastro", "Este e-mail já está cadastrado.");
-            return "redirect:/cadastro";
-        } else {
-            loginimpl.salvarLogin(login);
-            return "redirect:/login";
-        }
-    }
-
 
     @GetMapping("/login")
     public String fazerLogin(Model model){

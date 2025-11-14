@@ -9,9 +9,6 @@ import java.util.Optional;
 @Repository
 public interface LoginRepository extends JpaRepository<Login, Integer> {
 
-    boolean existsByEmail(String email);
-
     Optional<Login> findByEmail(String email);
-
 
 }

@@ -17,5 +17,4 @@ public class Educando {
     private Turma turma;
     private String observacoes;
 
-
 }

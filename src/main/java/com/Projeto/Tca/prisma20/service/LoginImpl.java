@@ -14,17 +14,6 @@ public class LoginImpl implements LoginService {
     @Autowired
     private LoginRepository loginRepository;
 
-
-    @Override
-    public Login salvarLogin(Login login) {
-        return loginRepository.save(login);
-    }
-
-    @Override
-    public boolean emailExiste(String emailLogin) {
-        return loginRepository.existsByEmail(emailLogin);
-    }
-
     @Override
     public boolean autenticar(String email, String senha) {
         Optional<Login> loginOpt = loginRepository.findByEmail(email);
