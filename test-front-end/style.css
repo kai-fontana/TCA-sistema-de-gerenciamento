@@ -1,25 +1,22 @@
-/* --- Paleta de Cores --- */
 :root {
-  /* Cores Primárias */
-  --color-primary: #3b82f6; /* Azul Principal */
-  --color-primary-dark: #2563eb; /* Azul Mais Escuro (para cards ativos/hover) */
 
-  /* Cores Neutras */
-  --color-background: #f8f9fa; /* Branco/Cinza Claro para fundo principal */
+  --color-primary: #3b82f6; 
+  --color-primary-dark: #2563eb;
+
+  --color-background: #f8f9fa;
   --color-white: #ffffff;
-  --color-text-dark: #343a40; /* Preto/Cinza Escuro para textos */
-  --color-text-secondary: #6c757d; /* Cinza Médio */
-  --color-sidebar: #343a40; /* Cor da barra lateral escura */
-  
-  /* Cores da Chamada (Light) */
-  --color-success-light: #d1e7dd; /* Fundo Verde Claro */
-  --color-danger-light: #f8d7da; /* Fundo Vermelho Claro */
-  --color-warning-light: #fff3cd; /* Fundo Amarelo Claro */
+  --color-text-dark: #343a40; 
+  --color-text-secondary: #6c757d;
+  --color-sidebar: #1652a3;
+ 
+  --color-success-light: #d1e7dd;
+  --color-danger-light: #f8d7da;
+  --color-warning-light: #fff3cd; 
 }
 
-/* --- Estilos Gerais --- */
+
 body {
-  font-family: 'Inter', sans-serif; /* Usando Inter como fonte padrão (melhor legibilidade) */
+  font-family: 'Inter', sans-serif; /*SERÁ QUE USO POPPINS?*/
   background-color: var(--color-background);
   color: var(--color-text-dark);
 }
@@ -29,7 +26,7 @@ a {
   color: inherit;
 }
 
-/* Botão Customizado - Usa cor primária do tema */
+
 .btn-primary-custom {
     background-color: var(--color-primary);
     border-color: var(--color-primary);
@@ -42,10 +39,9 @@ a {
     color: var(--color-white);
 }
 
-/* --- Layout Principal (Grid) --- */
 .grid-container {
   display: grid;
-  grid-template-columns: 250px 1fr; /* Largura da sidebar e conteúdo */
+  grid-template-columns: 250px 1fr; 
   grid-template-rows: auto 1fr;
   grid-template-areas:
     "sidebar header"
@@ -53,7 +49,6 @@ a {
   min-height: 100vh;
 }
 
-/* --- Header --- */
 .header {
   grid-area: header;
   background-color: var(--color-white);
@@ -72,7 +67,6 @@ a {
   justify-content: center;
 }
 
-/* --- Sidebar --- */
 #sidebar {
   grid-area: sidebar;
   background-color: var(--color-sidebar);
@@ -94,8 +88,9 @@ a {
 .text-sumario a {
   display: block;
   padding: 10px 15px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   border-radius: 8px;
+  font-size: 20px;
   color: rgba(255, 255, 255, 0.8);
   transition: background-color 0.2s, color 0.2s;
 }
@@ -111,13 +106,11 @@ a {
   font-weight: 600;
 }
 
-/* --- Main Content --- */
 .main-container {
   grid-area: main;
   padding: 20px;
 }
 
-/* --- Seções de Conteúdo --- */
 .titulo-secao {
   margin-bottom: 20px;
 }
@@ -154,14 +147,14 @@ a {
 .class-carousel {
   display: flex;
   gap: 15px;
-  overflow-x: hidden; /* Oculta a barra de rolagem nativa */
-  scroll-behavior: smooth; /* Habilita a rolagem suave por JS */
+  overflow-x: hidden;
+  scroll-behavior: smooth; 
   padding: 10px 0;
   flex-grow: 1;
 }
 
 .class-card {
-  min-width: 220px; /* Largura mínima para o card */
+  min-width: 220px; 
   padding: 20px;
   border-radius: 12px;
   color: var(--color-white);
@@ -196,13 +189,11 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Posicionamento relativo ao carousel-container */
   position: relative; 
   z-index: 10;
   cursor: pointer;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: background-color 0.2s;
-  /* Garante que os botões fiquem fora da área de rolagem */
   flex-shrink: 0;
 }
 
@@ -215,7 +206,6 @@ a {
 }
 
 
-/* Cores do Carrossel (Backgrounds) */
 .bg-primary-dark { background-color: var(--color-primary-dark); }
 .bg-secondary-dark { background-color: var(--color-secondary-dark); }
 .bg-tertiary-dark { background-color: var(--color-tertiary-dark); }
@@ -292,11 +282,7 @@ a {
   color: var(--color-text-dark);
 }
 
-
- Cores do Carrossel (Backgrounds) 
 .bg-primary-dark { background-color: var(--color-primary-dark); }*/
-
-/* --- HUB DE AÇÕES RÁPIDAS --- */
 
 .action-card {
   transition: all 0.3s ease;
@@ -309,9 +295,7 @@ a {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilos dinâmicos baseados no atributo data-color */
 
-/* Cor Primária: Gerenciar Turmas */
 .action-card[data-color="primary"] {
   border-left: 5px solid var(--color-primary-dark);
 }
@@ -322,7 +306,7 @@ a {
   border-color: var(--color-primary);
 }
 
-/* Cor Secundária: Realizar Chamada */
+
 .action-card[data-color="secondary"] {
   border-left: 5px solid var(--color-secondary-dark);
 }
@@ -333,7 +317,6 @@ a {
   border-color: var(--color-secondary);
 }
 
-/* Cor Terciária/Info: Cadastrar Educando */
 .action-card[data-color="tertiary"] {
   border-left: 5px solid var(--color-tertiary-dark);
 }
@@ -344,7 +327,6 @@ a {
   border-color: var(--color-tertiary);
 }
 
-/* Ajuste nos botões para a cor terciária */
 .btn-outline-info {
     --bs-btn-color: var(--color-tertiary-dark);
     --bs-btn-border-color: var(--color-tertiary-dark);
@@ -356,9 +338,7 @@ a {
     --bs-btn-disabled-border-color: var(--color-tertiary);
 }
 
-/* --- Estilos específicos para a Tabela de Chamada --- */
 
-/* Fundo da linha para status */
 .table-success-light {
     background-color: var(--color-success-light) !important;
 }
@@ -369,13 +349,41 @@ a {
     background-color: var(--color-warning-light) !important;
 }
 
-/* Ajuste para garantir que o hover ainda funcione */
 .table-educandos tbody tr:hover {
-    background-color: rgba(0, 0, 0, 0.05) !important; /* Um cinza claro padrão para hover */
+    background-color: #000000fb !important; 
 }
 
 
-/* --- Responsividade (Para dispositivos menores que 768px) --- */
+/*    LOGIN    */
+
+.login-body {
+  margin-top: 5%;
+}
+.login-body .login-area {
+  background-color: #1652a3;
+}
+
+.login-area .login-card {
+  min-width: 300px;
+}
+
+.login-area .login-card h2 {
+  font-weight: 600;
+}
+
+.login-area .login-card .text-secondary {
+  font-weight: 700;
+}
+
+.imagem-aside h3 {
+  font-weight: 600;
+  color: var(--color-white);
+  
+}
+
+
+/*   RESPOSIVIDADE  */
+
 @media (max-width: 768px) {
   .grid-container {
     grid-template-columns: 1fr;
@@ -389,7 +397,7 @@ a {
     height: auto;
     width: 100%;
     padding: 10px;
-    /* Torna a sidebar horizontal e retrátil em mobile, se necessário */
+
   }
 
   .titulo-pagina {

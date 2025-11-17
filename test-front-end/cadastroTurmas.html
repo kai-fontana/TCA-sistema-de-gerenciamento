@@ -5,10 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Links MANDATÓRIOS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="style.css">
 
     <title>Prisma - Cadastro de Turma</title>
 
@@ -17,7 +16,7 @@
 <body>
 
     <div class="grid-container">
-        <!-- HEADER (Mantido) -->
+
         <header class="header">
             <nav class="d-flex justify-content-between align-items-center h-100 px-4">
                 <div class="d-flex align-items-center">
@@ -32,43 +31,43 @@
                 <div class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        <img src="https://placehold.co/40x40/aaa/fff?text=R" class="rounded-circle"
+                        <img src="https://placehold.co/40x40/aaa/fff?text=C" class="rounded-circle"
                             alt="Avatar do Usuário" style="height:40px;">
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item" href="#">Editar Perfil</a></li>
-                        <li><a class="dropdown-item" href="#">Trocar de conta</a></li>
+                        <li><a class="dropdown-item" href="login.html">Trocar de conta</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="index.html">Logout</a></li>
+                        <li><a class="dropdown-item" href="login.html">Logout</a></li>
                     </ul>
                 </div>
             </nav>
         </header>
 
-        <!-- SIDEBAR (Mantido) -->
         <aside id="sidebar">
             <div class="titulo-pagina">
-                <h3><a href="dashboard.html">PRISMA</a></h3>
+                <h3><a href="index.html">PRISMA</a></h3>
             </div>
             <hr>
             <div class="text-sumario">
-                <a href="dashboard.html"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
-                <!-- Ícone Ativo -->
-                <a href="turmas.html" class="active"><i class="bi bi-people-fill me-2"></i>Turmas</a>
-                <a href="#"><i class="bi bi-list-check me-2"></i>Chamada</a>
-                <a href="#"><i class="bi bi-gear-fill me-2"></i>Configurações</a>
+                <a href="turmas.html"><i class="bi bi-people-fill me-2"></i>Turmas</a>
+                <a href="turmas.html"><i class="bi bi-person-video3 me-2"></i>Educandos</a>
+                <a href="chamada.html"><i class="bi bi-list-check me-2"></i>Chamada</a>
             </div>
         </aside>
 
-        <!-- MAIN CONTENT - CONTEÚDO ESPECÍFICO DE CADASTRO DE TURMA -->
         <main class="main-container p-4">
 
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h3 class="mb-0">Cadastro de Nova Turma</h3>
+                <div>
+                    <h3 class="mb-0">Cadastro de Nova Turma</h3>
+                    <p class="text-secondary">Selecione uma turma para gerenciar seus alunos e fazer a chamada.</p>
+                </div>
+
                 <a href="turmas.html" class="btn btn-outline-secondary d-flex align-items-center">
-                    <i class="bi bi-arrow-left me-2"></i> Voltar para Turmas
+                    <i class="bi bi-arrow-left me-2"></i> Voltar
                 </a>
             </div>
 
@@ -76,7 +75,8 @@
                 <form action="turmas.html" method="POST">
                     <div class="row g-3">
                         <div class="col-md-6">
-                            <label for="nome" class="form-label">Nome da Turma (Ex: FTI - Front End 2025.1)</label>
+                            <label for="nome" class="form-label">Nome da Turma (Ex: JOVEM APRENDIZ - SKILLO
+                                2025.2)</label>
                             <input type="text" class="form-control" id="nome" required>
                         </div>
                         <div class="col-md-3">
@@ -94,17 +94,17 @@
                         </div>
 
                         <div class="col-12 mt-4">
-                            <label for="descricao" class="form-label">Descrição Breve da Turma</label>
+                            <label for="descricao" class="form-label">Descrição da Turma</label>
                             <textarea class="form-control" id="descricao" rows="3"></textarea>
                         </div>
 
                         <div class="col-md-6 mt-4">
-                            <label for="instrutor" class="form-label">Instrutor/Professor Principal</label>
+                            <label for="instrutor" class="form-label">Educador responsável</label>
                             <select id="instrutor" class="form-select" required>
-                                <option selected>Selecione um professor</option>
+                                <option selected>Selecione um educador</option>
                                 <option>Rodrigo Bergenthal</option>
-                                <option>Outro Professor A</option>
-                                <option>Outro Professor B</option>
+                                <option>Heregon</option>
+                                <option>Andrielly(?)</option>
                             </select>
                         </div>
                         <div class="col-md-6 mt-4">
