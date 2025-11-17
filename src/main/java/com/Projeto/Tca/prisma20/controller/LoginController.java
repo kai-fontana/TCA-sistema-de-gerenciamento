@@ -1,5 +1,4 @@
 package com.Projeto.Tca.prisma20.controller;
-import com.Projeto.Tca.prisma20.model.Login;
 import com.Projeto.Tca.prisma20.model.RequisicaoLogin;
 import com.Projeto.Tca.prisma20.service.LoginImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @org.springframework.stereotype.Controller
 @RequestMapping("/")
@@ -16,21 +14,14 @@ public class LoginController {
     @Autowired
     private LoginImpl loginimpl;
 
-    @GetMapping
-    public String telaInicial(){
-
-        return "telaInicial";
-    }
-
 
     @GetMapping("/login")
     public String fazerLogin(Model model){
         RequisicaoLogin reqLogin = new RequisicaoLogin();
 
         model.addAttribute("reqLogin", reqLogin);
-        return "fazer-login";
+        return "login";
     }
-
 
     @PostMapping("/login")
     public String compararLogin(@ModelAttribute("reqLogin") RequisicaoLogin loginReq){

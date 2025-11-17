@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Links MANDATÓRIOS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <title>Prisma - Realizar Chamada</title>
+
+</head>
+
+<body>
+
+    <div class="grid-container">
+        <!-- HEADER (Mantido) -->
+        <header class="header">
+            <nav class="d-flex justify-content-between align-items-center h-100 px-4">
+                <div class="d-flex align-items-center">
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Pesquisar..."
+                            style="border-radius: 50px; width: 400px; height: 40px;">
+                        <button class="btn btn-primary search-btn" type="submit">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </form>
+                </div>
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <img src="https://placehold.co/40x40/aaa/fff?text=R" class="rounded-circle"
+                            alt="Avatar do Usuário" style="height:40px;">
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#">Editar Perfil</a></li>
+                        <li><a class="dropdown-item" href="#">Trocar de conta</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="index.html">Logout</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <!-- SIDEBAR (Chamada Ativa) -->
+        <aside id="sidebar">
+            <div class="titulo-pagina">
+                <h3><a href="index.html">PRISMA</a></h3>
+            </div>
+            <hr>
+            <div class="text-sumario">
+                <a href="turmas.html"><i class="bi bi-people-fill me-2"></i>Turmas</a>
+                <a href="chamada.html" class="active"><i class="bi bi-list-check me-2"></i>Chamada</a>
+                <a href="#"><i class="bi bi-gear-fill me-2"></i>Configurações</a>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT - CONTEÚDO ESPECÍFICO DA CHAMADA -->
+        <main class="main-container p-4">
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h3 class="mb-0">Registro de Chamada</h3>
+                    <p class="text-secondary">Selecione a turma e marque a presença dos educandos. <span
+                            class="fw-bold text-primary">Data: <span id="dataChamada"></span></span></p>
+                </div>
+                <button id="btnSalvarChamada" class="btn btn-success d-flex align-items-center" disabled>
+                    <i class="bi bi-cloud-check-fill me-2"></i> Salvar Chamada (0/0)
+                </button>
+            </div>
+
+            <div class="card shadow-sm p-4 mb-4">
+                <div class="row align-items-end">
+                    <div class="col-md-5">
+                        <label for="selectTurma" class="form-label fw-bold">Turma:</label>
+                        <select id="selectTurma" class="form-select" disabled>
+                            <option value="" selected>Carregando turmas...</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="selectAula" class="form-label fw-bold">Conteúdo/Aula:</label>
+                        <input type="text" id="selectAula" class="form-control"
+                            placeholder="Ex: Módulo 3 - Introdução ao Java">
+                    </div>
+                    <div class="col-md-3 mt-3 mt-md-0">
+                        <button id="btnMarcarTodosPresentes" class="btn btn-outline-success w-100" disabled>
+                            <i class="bi bi-check-all me-2"></i> Marcar Todos Presentes
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabela de Chamada -->
+            <div class="card shadow-sm p-4">
+                <div id="loadingIndicator" class="text-center p-5">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Carregando...</span>
+                    </div>
+                    <p class="mt-3 text-secondary">Aguardando a inicialização do sistema de dados...</p>
+                </div>
+
+                <div class="table-responsive d-none" id="chamadaContent">
+                    <table class="table table-hover table-striped table-educandos">
+                        <thead>
+                            <tr>
+                                <th scope="col">Foto</th>
+                                <th scope="col">Nome do Educando</th>
+                                <th scope="col">Matrícula</th>
+                                <th scope="col">Status Atual</th>
+                                <th scope="col" class="text-center">Ações (Presença)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="listaEducandos">
+                            <!-- Linhas de alunos serão inseridas aqui via JavaScript -->
+                        </tbody>
+                    </table>
+                    <p id="noStudentsMessage" class="text-center text-muted d-none">
+                        Nenhum educando encontrado para esta turma.
+                    </p>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+
+    <!-- Scripts (Firebase e Lógica) -->
+    <script type="module">
+        // --- Configuração Firebase e Firestore (Simulação de Backend) ---
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, collection, query, onSnapshot, getDocs, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        setLogLevel('error'); // Apenas para debug; mantenha 'error' ou 'silent' em produção.
+
+        // Variáveis Globais (MANDATÓRIAS do Canvas)
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        let db;
+        let auth;
+        let userId = null;
+        let isAuthReady = false;
+
+        // --- Variáveis de Estado da Aplicação ---
+        let turmas = []; // Lista de todas as turmas
+        let alunosDaTurma = []; // Alunos da turma selecionada
+        let statusChamada = {}; // { matricula: 'PRESENTE' | 'FALTA' | 'JUSTIFICADA' }
+        let turmaSelecionadaId = null;
+
+        // Elementos do DOM
+        const selectTurma = document.getElementById('selectTurma');
+        const listaEducandos = document.getElementById('listaEducandos');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const chamadaContent = document.getElementById('chamadaContent');
+        const noStudentsMessage = document.getElementById('noStudentsMessage');
+        const btnSalvarChamada = document.getElementById('btnSalvarChamada');
+        const dataChamadaSpan = document.getElementById('dataChamada');
+        const btnMarcarTodosPresentes = document.getElementById('btnMarcarTodosPresentes');
+
+        dataChamadaSpan.textContent = new Date().toLocaleDateString('pt-BR');
+
+        // --- Funções de Inicialização e Dados ---
+
+        async function initializeFirebase() {
+            try {
+                if (firebaseConfig) {
+                    const app = initializeApp(firebaseConfig);
+                    db = getFirestore(app);
+                    auth = getAuth(app);
+
+                    await new Promise((resolve, reject) => {
+                        const unsubscribe = onAuthStateChanged(auth, async (user) => {
+                            unsubscribe();
+                            if (user) {
+                                userId = user.uid;
+                                console.log("Firebase autenticado com sucesso. UID:", userId);
+                            } else if (initialAuthToken) {
+                                await signInWithCustomToken(auth, initialAuthToken);
+                                userId = auth.currentUser.uid;
+                            } else {
+                                await signInAnonymously(auth);
+                                userId = auth.currentUser.uid;
+                            }
+                            isAuthReady = true;
+                            resolve();
+                        }, reject);
+                    });
+                } else {
+                    console.error("Firebase config não encontrado. A funcionalidade de dados não será inicializada.");
+                }
+            } catch (error) {
+                console.error("Erro na inicialização do Firebase ou autenticação:", error);
+            } finally {
+                if (isAuthReady) {
+                    await loadTurmas();
+                    selectTurma.disabled = false;
+                    loadingIndicator.classList.add('d-none');
+                    chamadaContent.classList.remove('d-none');
+                } else {
+                    loadingIndicator.querySelector('p').textContent = "Erro ao conectar com o serviço de dados.";
+                }
+            }
+        }
+
+        // Função para simular o carregamento das Turmas do seu "Backend" (Firestore)
+        async function loadTurmas() {
+            if (!isAuthReady) return;
+
+            const turmasRef = collection(db, `artifacts/${appId}/users/${userId}/turmas`);
+            try {
+                // Se não houver turmas, crie algumas turmas e alunos de exemplo
+                const snapshot = await getDocs(turmasRef);
+                if (snapshot.empty) {
+                    await createInitialData();
+                }
+
+                // Carregar Turmas (real-time listener)
+                onSnapshot(turmasRef, (snapshot) => {
+                    turmas = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                    renderTurmaSelect();
+                    // Seleciona a primeira turma carregada
+                    if (turmas.length > 0 && !turmaSelecionadaId) {
+                        turmaSelecionadaId = turmas[0].id;
+                        selectTurma.value = turmaSelecionadaId;
+                        loadEducandosDaTurma(turmaSelecionadaId);
+                    }
+                }, (error) => console.error("Erro ao carregar turmas:", error));
+
+            } catch (e) {
+                console.error("Erro ao carregar ou criar dados iniciais:", e);
+            }
+        }
+
+        // Função para simular a criação de dados iniciais (Para testes)
+        async function createInitialData() {
+            const turmasRef = collection(db, `artifacts/${appId}/users/${userId}/turmas`);
+            const alunosRef = collection(db, `artifacts/${appId}/users/${userId}/educandos`);
+
+            // Turma de Exemplo
+            const turmaDoc = await addDoc(turmasRef, {
+                nome: "FTI - Front End | 2025.1",
+                periodo: "2025/1",
+                instrutor: "Rodrigo Bergenthal",
+                dataInicio: "2025-03-01"
+            });
+            const turmaId = turmaDoc.id;
+
+            // Alunos de Exemplo
+            const alunosData = [
+                { nome: "João Batista Silva", matricula: "2025001", email: "joao.silva@escola.com", turmaId: turmaId, fotoUrl: "https://placehold.co/30x30/f59e0b/fff?text=JB" },
+                { nome: "Maria Souza Costa", matricula: "2025002", email: "maria.costa@escola.com", turmaId: turmaId, fotoUrl: "https://placehold.co/30x30/3b82f6/fff?text=MS" },
+                { nome: "Antônio Vieira Júnior", matricula: "2025003", email: "antonio.jr@escola.com", turmaId: turmaId, fotoUrl: "https://placehold.co/30x30/10b981/fff?text=AV" },
+                { nome: "Carla Pereira Lima", matricula: "2025004", email: "carla.lima@escola.com", turmaId: turmaId, fotoUrl: "https://placehold.co/30x30/ef4444/fff?text=CL" },
+            ];
+
+            for (const aluno of alunosData) {
+                await addDoc(alunosRef, aluno);
+            }
+            console.log("Dados iniciais (Turma e Educandos) criados.");
+        }
+
+        // Função para popular o select de Turmas
+        function renderTurmaSelect() {
+            selectTurma.innerHTML = ''; // Limpa as opções existentes
+
+            if (turmas.length === 0) {
+                selectTurma.innerHTML = '<option value="" disabled>Nenhuma turma cadastrada.</option>';
+                btnSalvarChamada.disabled = true;
+                btnMarcarTodosPresentes.disabled = true;
+                return;
+            }
+
+            turmas.forEach(turma => {
+                const option = document.createElement('option');
+                option.value = turma.id;
+                option.textContent = turma.nome;
+                selectTurma.appendChild(option);
+            });
+
+            // Habilita e seleciona a primeira turma por padrão
+            selectTurma.disabled = false;
+            btnSalvarChamada.disabled = false;
+            btnMarcarTodosPresentes.disabled = false;
+        }
+
+        // Função para carregar Educandos da Turma selecionada
+        async function loadEducandosDaTurma(turmaId) {
+            if (!isAuthReady || !turmaId) return;
+
+            const educandosRef = collection(db, `artifacts/${appId}/users/${userId}/educandos`);
+            // Simulação de filtro: em um backend real, isso seria um endpoint GET /turmas/{id}/educandos
+            const q = query(educandosRef, /* where("turmaId", "==", turmaId) */);
+            // Nota: Filtramos apenas por "turmaId" na lógica do cliente para simplificar a simulação no Canvas,
+            // mas um backend real garantiria que apenas alunos daquela turma fossem retornados.
+
+            onSnapshot(q, (snapshot) => {
+                alunosDaTurma = snapshot.docs
+                    .map(doc => ({ id: doc.id, ...doc.data() }))
+                    .filter(aluno => aluno.turmaId === turmaId); // Filtro manual para simulação
+
+                // Reseta o status da chamada para a nova turma
+                statusChamada = {};
+                alunosDaTurma.forEach(aluno => {
+                    // Estado inicial: 'FALTA' para forçar a ação do usuário
+                    statusChamada[aluno.matricula] = 'FALTA';
+                });
+
+                renderListaEducandos();
+                updateSalvarButton();
+
+            }, (error) => console.error("Erro ao carregar educandos:", error));
+        }
+
+        // --- Renderização da Interface ---
+
+        function renderListaEducandos() {
+            listaEducandos.innerHTML = '';
+
+            if (alunosDaTurma.length === 0) {
+                noStudentsMessage.classList.remove('d-none');
+                return;
+            }
+            noStudentsMessage.classList.add('d-none');
+
+            alunosDaTurma.forEach(aluno => {
+                const row = document.createElement('tr');
+                row.id = `aluno-${aluno.matricula}`;
+                row.innerHTML = `
+                <td>
+                    <img src="${aluno.fotoUrl || 'https://placehold.co/30x30/6c757d/fff?text=?'}" 
+                         class="rounded-circle shadow-sm" alt="Foto" style="width:30px; height:30px; object-fit: cover;">
+                </td>
+                <td>${aluno.nome}</td>
+                <td>${aluno.matricula}</td>
+                <td>
+                    <span id="status-${aluno.matricula}" class="badge text-bg-danger fw-bold">FALTA</span>
+                </td>
+                <td class="text-center">
+                    ${createStatusButtons(aluno.matricula)}
+                </td>
+            `;
+                listaEducandos.appendChild(row);
+
+                // Garante que o status visual inicial seja 'FALTA'
+                updateStatusDisplay(aluno.matricula, 'FALTA');
+            });
+        }
+
+        function createStatusButtons(matricula) {
+            return `
+            <button data-matricula="${matricula}" data-status="PRESENTE" class="btn btn-sm btn-outline-success me-2 btn-status" title="Presente">
+                <i class="bi bi-check-lg"></i>
+            </button>
+            <button data-matricula="${matricula}" data-status="FALTA" class="btn btn-sm btn-outline-danger me-2 btn-status" title="Falta">
+                <i class="bi bi-x-lg"></i>
+            </button>
+            <button data-matricula="${matricula}" data-status="JUSTIFICADA" class="btn btn-sm btn-outline-warning btn-status" title="Falta Justificada">
+                <i class="bi bi-info-lg"></i>
+            </button>
+        `;
+        }
+
+        function updateStatusDisplay(matricula, status) {
+            const statusSpan = document.getElementById(`status-${matricula}`);
+            const row = document.getElementById(`aluno-${matricula}`);
+            if (!statusSpan || !row) return;
+
+            let badgeClass = '';
+            let statusText = '';
+            let rowClass = '';
+
+            switch (status) {
+                case 'PRESENTE':
+                    badgeClass = 'text-bg-success';
+                    statusText = 'PRESENTE';
+                    rowClass = 'table-success-light';
+                    break;
+                case 'FALTA':
+                    badgeClass = 'text-bg-danger';
+                    statusText = 'FALTA';
+                    rowClass = 'table-danger-light';
+                    break;
+                case 'JUSTIFICADA':
+                    badgeClass = 'text-bg-warning';
+                    statusText = 'FALTA JUSTIFICADA';
+                    rowClass = 'table-warning-light';
+                    break;
+                default:
+                    badgeClass = 'text-bg-secondary';
+                    statusText = 'PENDENTE';
+                    rowClass = '';
+            }
+
+            statusSpan.className = `badge ${badgeClass} fw-bold`;
+            statusSpan.textContent = statusText;
+            row.className = rowClass;
+
+            // Atualiza o estado global
+            statusChamada[matricula] = status;
+            updateSalvarButton();
+        }
+
+        function updateSalvarButton() {
+            const total = alunosDaTurma.length;
+            const marcados = Object.values(statusChamada).filter(s => s !== 'PENDENTE').length;
+
+            btnSalvarChamada.textContent = `Salvar Chamada (${marcados}/${total})`;
+            btnSalvarChamada.disabled = marcados !== total || total === 0;
+
+            if (marcados === total && total > 0) {
+                btnSalvarChamada.classList.remove('btn-success');
+                btnSalvarChamada.classList.add('btn-primary-custom');
+            } else {
+                btnSalvarChamada.classList.remove('btn-primary-custom');
+                btnSalvarChamada.classList.add('btn-success');
+            }
+        }
+
+        // --- Funções de Evento (Interações) ---
+
+        // Evento de clique para marcar presença/falta
+        listaEducandos.addEventListener('click', (e) => {
+            const target = e.target.closest('.btn-status');
+            if (target) {
+                const matricula = target.dataset.matricula;
+                const status = target.dataset.status;
+                updateStatusDisplay(matricula, status);
+            }
+        });
+
+        // Evento de mudança de turma
+        selectTurma.addEventListener('change', (e) => {
+            turmaSelecionadaId = e.target.value;
+            loadEducandosDaTurma(turmaSelecionadaId);
+        });
+
+        // Evento de Marcar Todos Presentes
+        btnMarcarTodosPresentes.addEventListener('click', () => {
+            if (confirm("Deseja realmente marcar TODOS os educandos como PRESENTE?")) {
+                alunosDaTurma.forEach(aluno => {
+                    updateStatusDisplay(aluno.matricula, 'PRESENTE');
+                });
+            }
+        });
+
+        // Evento de Salvar Chamada (Integração com o "Backend")
+        btnSalvarChamada.addEventListener('click', async () => {
+            if (!isAuthReady || !turmaSelecionadaId || !btnSalvarChamada.disabled) return;
+
+            const aulaDescricao = document.getElementById('selectAula').value.trim();
+            if (!aulaDescricao) {
+                alert("Por favor, preencha a descrição do Conteúdo/Aula antes de salvar.");
+                return;
+            }
+
+            const registros = alunosDaTurma.map(aluno => ({
+                matricula: aluno.matricula,
+                nome: aluno.nome,
+                status: statusChamada[aluno.matricula],
+                turmaId: turmaSelecionadaId,
+            }));
+
+            const chamadaData = {
+                turmaId: turmaSelecionadaId,
+                nomeTurma: turmas.find(t => t.id === turmaSelecionadaId)?.nome || "Turma Desconhecida",
+                data: dataChamadaSpan.textContent, // Data formatada
+                dataRegistro: serverTimestamp(), // Timestamp do Firestore
+                aulaDescricao: aulaDescricao,
+                instrutorId: userId,
+                registros: registros
+            };
+
+            // Simulação de chamada POST para o seu backend Java (onde salvaria no PostgreSQL)
+            // No mundo real, você faria um: 
+            // fetch('/api/chamada', { method: 'POST', body: JSON.stringify(chamadaData), ... });
+
+            try {
+                // Salva no Firestore (simulação)
+                const chamadasRef = collection(db, `artifacts/${appId}/users/${userId}/chamadas`);
+                await addDoc(chamadasRef, chamadaData);
+
+                alert("Chamada salva com sucesso! (Simulação via Firestore)");
+                // Opcional: Recarregar ou limpar a página após salvar
+                // location.reload(); 
+
+            } catch (error) {
+                console.error("Erro ao salvar a chamada:", error);
+                alert("Erro ao salvar a chamada. Verifique o console.");
+            }
+        });
+
+        // Inicia a aplicação
+        initializeFirebase();
+
+    </script>
+
+    <!-- Incluindo script.js para estilos customizados no Bootstrap (necessário para btn-primary-custom) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>

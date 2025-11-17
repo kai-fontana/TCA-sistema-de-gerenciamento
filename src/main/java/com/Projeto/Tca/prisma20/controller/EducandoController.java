@@ -25,7 +25,7 @@ public class EducandoController {
 
         model.addAttribute("listaEducandos", educandoImpl.pegarEducandosPorTurma(turmaIdSelecionada));
 
-        return "listar-educandos";
+        return "turmas";
     }
 
 
@@ -33,8 +33,8 @@ public class EducandoController {
     public String criarEducando(Model model){
         Educando educando = new Educando();
 
-        model.addAttribute("educando" , educando);
-        return "criar-educando";
+        model.addAttribute("educando", educando);
+        return "cadastroEducandos";
     }
 
     @PostMapping("/criarEducando")

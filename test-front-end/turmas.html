@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Links MANDATÓRIOS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>Prisma - Turmas</title>
+
+</head>
+
+<body>
+
+    <div class="grid-container">
+        <!-- HEADER (Mantido) -->
+        <header class="header">
+            <nav class="d-flex justify-content-between align-items-center h-100 px-4">
+                <div class="d-flex align-items-center">
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Pesquisar..."
+                            style="border-radius: 50px; width: 400px; height: 40px;">
+                        <button class="btn btn-primary search-btn" type="submit">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </form>
+                </div>
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <img src="https://placehold.co/40x40/aaa/fff?text=R" class="rounded-circle"
+                            alt="Avatar do Usuário" style="height:40px;">
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#">Editar Perfil</a></li>
+                        <li><a class="dropdown-item" href="#">Trocar de conta</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="index.html">Logout</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <!-- SIDEBAR (Mantido) -->
+        <aside id="sidebar">
+            <div class="titulo-pagina">
+                <h3><a href="dashboard.html">PRISMA</a></h3>
+            </div>
+            <hr>
+            <div class="text-sumario">
+                <a href="dashboard.html"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
+                <!-- Ícone Ativo -->
+                <a href="turmas.html" class="active"><i class="bi bi-people-fill me-2"></i>Turmas</a>
+                <a href="#"><i class="bi bi-list-check me-2"></i>Chamada</a>
+                <a href="#"><i class="bi bi-gear-fill me-2"></i>Configurações</a>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT - CONTEÚDO ESPECÍFICO DE TURMAS -->
+        <main class="main-container p-4">
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h3 class="mb-0">Gestão de Educandos por Turma</h3>
+                    <p class="text-secondary">Selecione uma turma para gerenciar seus alunos e fazer a chamada.</p>
+                </div>
+                <a href="cadastroEducandos.html" class="btn btn-primary-custom d-flex align-items-center">
+                    <i class="bi bi-person-plus-fill me-2"></i> Adicionar Educando
+                </a>
+            </div>
+
+            <div class="card shadow-sm p-4">
+
+                <!-- Filtro de Turmas -->
+                <div class="mb-3">
+                    <label for="selectTurma" class="form-label fw-bold">Turma Selecionada:</label>
+                    <select id="selectTurma" class="form-select w-50">
+                        <option selected>FTI - Front End | 2025.1</option>
+                        <option>SKILLO - UI/UX Design | 2025.1</option>
+                        <option>ADM - Logística | 2024.2</option>
+                    </select>
+                </div>
+
+                <div class="table-responsive mt-4">
+                    <table class="table table-hover table-striped table-educandos">
+                        <thead>
+                            <tr>
+                                <th scope="col">Foto</th>
+                                <th scope="col">Nome do Educando</th>
+                                <th scope="col">Matrícula</th>
+                                <th scope="col">E-mail</th>
+                                <th scope="col">Situação</th>
+                                <th scope="col">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Educando 1 - Com Foto -->
+                            <tr>
+                                <td>
+                                    <img src="https://placehold.co/30x30/f59e0b/fff?text=JB" class="rounded-circle"
+                                        alt="Foto de Perfil" style="object-fit: cover;">
+                                </td>
+                                <td>João Batista Silva</td>
+                                <td>2025001</td>
+                                <td>joao.silva@escola.com</td>
+                                <td><span class="badge bg-success">Ativo</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary me-2" title="Fazer Chamada"><i
+                                            class="bi bi-list-check"></i></button>
+                                    <button class="btn btn-sm btn-outline-secondary me-2" title="Editar"><i
+                                            class="bi bi-pencil"></i></button>
+                                    <button class="btn btn-sm btn-outline-danger" title="Remover"><i
+                                            class="bi bi-trash"></i></button>
+                                </td>
+                            </tr>
+                            <!-- Educando 2 - Sem Foto (Placeholder) -->
+                            <tr>
+                                <td>
+                                    <img src="https://placehold.co/30x30/3b82f6/fff?text=MS" class="rounded-circle"
+                                        alt="Foto de Perfil" style="object-fit: cover;">
+                                </td>
+                                <td>Maria Souza Costa</td>
+                                <td>2025002</td>
+                                <td>maria.costa@escola.com</td>
+                                <td><span class="badge bg-success">Ativo</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary me-2"><i
+                                            class="bi bi-list-check"></i></button>
+                                    <button class="btn btn-sm btn-outline-secondary me-2"><i
+                                            class="bi bi-pencil"></i></button>
+                                    <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                </td>
+                            </tr>
+                            <!-- Educando 3 - Inativo -->
+                            <tr>
+                                <td>
+                                    <img src="https://placehold.co/30x30/6c757d/fff?text=AV" class="rounded-circle"
+                                        alt="Foto de Perfil" style="object-fit: cover;">
+                                </td>
+                                <td>Antônio Vieira Júnior</td>
+                                <td>2025003</td>
+                                <td>antonio.jr@escola.com</td>
+                                <td><span class="badge bg-secondary">Trancado</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary me-2" disabled
+                                        title="Fazer Chamada"><i class="bi bi-list-check"></i></button>
+                                    <button class="btn btn-sm btn-outline-secondary me-2"><i
+                                            class="bi bi-pencil"></i></button>
+                                    <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+
+    <!-- Scripts MANDATÓRIOS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

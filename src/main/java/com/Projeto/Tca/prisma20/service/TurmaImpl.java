@@ -3,9 +3,11 @@ package com.Projeto.Tca.prisma20.service;
 import com.Projeto.Tca.prisma20.model.Turma;
 import com.Projeto.Tca.prisma20.repository.TurmaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class TurmaImpl implements TurmaService{
 
     @Autowired

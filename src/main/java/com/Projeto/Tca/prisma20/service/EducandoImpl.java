@@ -3,6 +3,7 @@ package com.Projeto.Tca.prisma20.service;
 import com.Projeto.Tca.prisma20.model.Educando;
 import com.Projeto.Tca.prisma20.repository.EducandoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,7 +25,8 @@ public class EducandoImpl implements EducandoService{
     }
 
 
-    private static final String ATUALIZAR_DIR = "src/main/resources/static/images/";
+    @Value("${file.upload-dir}")
+    private String ATUALIZAR_DIR;
 
     public void salvarEducando(Educando educando, MultipartFile file) throws Exception {
 if (file != null && !file.isEmpty()) {
@@ -34,6 +36,8 @@ if (file != null && !file.isEmpty()) {
     Files.copy(file.getInputStream(), caminhoDestino, StandardCopyOption.REPLACE_EXISTING);
     String caminhoPublico = "/images/" + nomeArquivo;
     educando.setCaminhoImagem(caminhoPublico);
+
+
 
 } else if (educando.getId() != 0) {
     Educando educandoExistente = educandoRepository.findById(educando.getId())
