@@ -14,7 +14,10 @@ public class Educando {
     private String nome;
     private int idade;
     @ManyToOne
+    @Column(name = "turma_id")
     private Turma turma;
+    @Column(name = "caminho_imagem")
+    private String caminhoImagem;
     private String observacoes;
 
 }

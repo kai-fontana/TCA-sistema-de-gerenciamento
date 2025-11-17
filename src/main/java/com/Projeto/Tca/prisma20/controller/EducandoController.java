@@ -1,28 +1,29 @@
 package com.Projeto.Tca.prisma20.controller;
 
-
-
 import com.Projeto.Tca.prisma20.model.Educando;
 import com.Projeto.Tca.prisma20.service.EducandoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/listaEducandos")
+@SessionAttributes("turmaSelecionadaId")
 public class EducandoController {
 
     @Autowired
     private EducandoImpl educandoImpl;
 
     @GetMapping
-    public String listarEducandos(Model model){
+    public String listarEducandos(Model model, @SessionAttribute(name = "turmaSelecionadaId", required = false) Integer turmaIdSelecionada){
+        if (turmaIdSelecionada == null) {
+            return "redirect:/telainicial";
+        }
 
-        model.addAttribute("listaEducandos",educandoImpl.pegarEducandosPorTurma());
+
+        model.addAttribute("listaEducandos", educandoImpl.pegarEducandosPorTurma(turmaIdSelecionada));
 
         return "listar-educandos";
     }
@@ -37,9 +38,14 @@ public class EducandoController {
     }
 
     @PostMapping("/criarEducando")
-    public String salvarEducando(@ModelAttribute("educando")Educando educando){
+    public String salvarEducando(@ModelAttribute("educando")Educando educando, @RequestParam(value = "file", required = false) MultipartFile file ){
 
-        educandoImpl.salvarEducando(educando);
+        try {
+            educandoImpl.salvarEducando(educando, file);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/criarEducando";
+        }
 
         return "redirect:/listaeducandos";
     }

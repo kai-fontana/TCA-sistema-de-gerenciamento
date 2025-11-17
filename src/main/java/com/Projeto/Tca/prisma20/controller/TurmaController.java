@@ -4,23 +4,28 @@ package com.Projeto.Tca.prisma20.controller;
 import com.Projeto.Tca.prisma20.model.Turma;
 import com.Projeto.Tca.prisma20.service.TurmaImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+@Controller
 @RequestMapping("/telainicial")
+@SessionAttributes("turmaSelecionadaId")
 public class TurmaController {
     @Autowired
     TurmaImpl turmaImpl;
 
     @GetMapping
-    public String exibirTurmas(Model model){
+    public String exibirTurmas(Model model, @RequestParam(value = "turmaId", required = false) Integer turmaIdParam){
+        if (turmaIdParam != null && turmaIdParam != 0) {
+            model.addAttribute("turmaSelecionadaId", turmaIdParam);
+            return "redirect:/listaEducandos";
+        }
         model.addAttribute("turmas", turmaImpl.pegarTodasTurmas());
         return "telaInicial";
     }
+
 
     @GetMapping("/criarturma")
     public String criarTurma(Model model){
