@@ -9,17 +9,12 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/telainicial")
-@SessionAttributes("turmaSelecionadaId")
 public class TelaInicialController {
     @Autowired
     TelaInicialImpl telaInicialImpl;
 
     @GetMapping
-    public String exibirTurmas(Model model, @RequestParam(value = "turmaId", required = false) Integer turmaIdParam){
-        if (turmaIdParam != null && turmaIdParam != 0) {
-            model.addAttribute("turmaSelecionadaId", turmaIdParam);
-            return "redirect:/listaEducandos";
-        }
+    public String exibirTurmas(Model model){
         model.addAttribute("turmas", telaInicialImpl.pegarTodasTurmas());
         return "index";
     }

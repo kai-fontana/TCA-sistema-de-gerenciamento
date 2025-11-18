@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/educandos")
+@SessionAttributes("turmaSelecionadaId")
 public class EducandoController {
 
     @Autowired
@@ -17,8 +18,11 @@ public class EducandoController {
 
     @GetMapping
     public String listarEducandos(Model model, @RequestParam(value = "turmaId", required = false) Integer turmaIdParam){
-        model.addAttribute("listaEducandos", educandoImpl.pegarEducandosPorTurma(turmaIdParam));
+        if (turmaIdParam != null && turmaIdParam != 0) {
+            model.addAttribute("turmaSelecionadaId", turmaIdParam);
 
+            model.addAttribute("listaEducandos", educandoImpl.pegarEducandosPorTurma(turmaIdParam));
+        }
         return "educandos";
     }
 
@@ -28,7 +32,7 @@ public class EducandoController {
     public String deletarDadosEducando(@RequestParam("nomeEducando") String nomeEducando, @SessionAttribute("turmaSelecionadaId") Integer turmaId){
         educandoImpl.deletarEducando(educandoImpl.escolherEducando(nomeEducando));
 
-        return "redirect:/telainicial";
+        return "redirect:/educandos?turmaId=" + turmaId;
     }
 
 
@@ -41,7 +45,8 @@ public class EducandoController {
     }
 
     @PostMapping("/criarEducando")
-    public String salvarEducando(@ModelAttribute("educando")Educando educando, @RequestParam(value = "file", required = false) MultipartFile file ){
+    public String salvarEducando(@ModelAttribute("educando")Educando educando, @RequestParam(value = "file", required = false) MultipartFile file,
+                                 @SessionAttribute("turmaSelecionadaId") Integer turmaId){
 
         try {
             educandoImpl.salvarEducando(educando, file);
@@ -50,7 +55,7 @@ public class EducandoController {
             return "redirect:/criarEducando";
         }
 
-        return "redirect:/listaeducandos";
+        return "redirect:/educandos?turmaId=" + turmaId;
     }
 
 }

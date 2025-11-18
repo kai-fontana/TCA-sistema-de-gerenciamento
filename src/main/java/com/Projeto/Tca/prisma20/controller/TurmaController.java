@@ -17,7 +17,9 @@ public class TurmaController {
 
     @GetMapping
     public String exibirTurma(Model model, @RequestParam(value = "turmaId", required = false) Integer turmaIdParam){
-        model.addAttribute("turma", turmaImpl.mostrarTurma(turmaIdParam));
+        if (turmaIdParam != null && turmaIdParam != 0) {
+            model.addAttribute("turma", turmaImpl.mostrarTurma(turmaIdParam));
+        }
         return "turmas";
 
     }
@@ -35,9 +37,6 @@ public class TurmaController {
 
         turmaImpl.salvarTurma(turma);
 
-        //ra.addFlashAttribute("mensagemSucesso", "Turma criada com sucesso!");
-
-        //redirect: salva os dados e recarrega a página para um novo endereço "/criar-turma", deixando de lado o salvamento recém feito
         return "redirect:/telainicial/criarturma";
     }
 }

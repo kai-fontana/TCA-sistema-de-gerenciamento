@@ -29,11 +29,8 @@ public class LoginController {
         String compararSenha = loginReq.getSenhaReq();
 
         if (loginimpl.autenticar(compararEmail, compararSenha)){
-            //session.setAttribute("usuarioLogado", loginReq.getEmailReq());
             return "redirect:/telainicial";
         } else {
-            //model.addAttribute("erroLogin", "E-mail ou senha inválidos.");
-            //return "fazer-login";
             return "redirect:/login";
         }
     }

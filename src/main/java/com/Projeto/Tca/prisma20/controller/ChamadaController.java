@@ -19,7 +19,9 @@ public class ChamadaController {
 
     @GetMapping
     public String exibirChamada(Model model, @RequestParam(value = "turmaId", required = false) Integer turmaIdParam){
-        model.addAttribute("listaEducandos", educandoImpl.pegarEducandosPorTurma(turmaIdParam));
+        if (turmaIdParam != null && turmaIdParam != 0) {
+            model.addAttribute("listaEducandos", educandoImpl.pegarEducandosPorTurma(turmaIdParam));
+        }
 
         return "chamada";
     }
