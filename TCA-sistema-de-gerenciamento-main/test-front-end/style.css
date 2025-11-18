@@ -1,0 +1,428 @@
+:root {
+
+  --color-primary: #3b82f6; 
+  --color-primary-dark: #2563eb;
+
+  --color-background: #f8f9fa;
+  --color-white: #ffffff;
+  --color-text-dark: #343a40; 
+  --color-text-secondary: #6c757d;
+  --color-sidebar: #1652a3;
+ 
+  --color-success-light: #d1e7dd;
+  --color-danger-light: #f8d7da;
+  --color-warning-light: #fff3cd; 
+}
+
+
+body {
+  font-family: 'Inter', sans-serif; /*SERÁ QUE USO POPPINS?*/
+  background-color: var(--color-background);
+  color: var(--color-text-dark);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.btn-primary-custom {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-white);
+    transition: all 0.2s ease-in-out;
+}
+.btn-primary-custom:hover {
+    background-color: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+    color: var(--color-white);
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 250px 1fr; 
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "sidebar header"
+    "sidebar main";
+  min-height: 100vh;
+}
+
+.header {
+  grid-area: header;
+  background-color: var(--color-white);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  height: 70px;
+}
+
+.search-btn {
+  background-color: var(--color-primary);
+  border: none;
+  border-radius: 50px !important;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#sidebar {
+  grid-area: sidebar;
+  background-color: var(--color-sidebar);
+  color: var(--color-white);
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+.titulo-pagina h3 a {
+  color: var(--color-white);
+  font-weight: bold;
+}
+
+#sidebar hr {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.text-sumario a {
+  display: block;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.8);
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.text-sumario a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--color-white);
+}
+
+.text-sumario a.active {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-weight: 600;
+}
+
+.main-container {
+  grid-area: main;
+  padding: 20px;
+}
+
+.titulo-secao {
+  margin-bottom: 20px;
+}
+
+.pagination-secao p {
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+}
+
+.pagination-secao hr {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.header-secao {
+  background-color: var(--color-white);
+  border-radius: 12px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.header-secao h3 {
+  color: var(--color-primary-dark);
+}
+
+.carousel-wrapper {
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel-container {
+  display: flex;
+  align-items: center;
+}
+
+.class-carousel {
+  display: flex;
+  gap: 15px;
+  overflow-x: hidden;
+  scroll-behavior: smooth; 
+  padding: 10px 0;
+  flex-grow: 1;
+}
+
+.class-card {
+  min-width: 220px; 
+  padding: 20px;
+  border-radius: 12px;
+  color: var(--color-white);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease;
+}
+
+.class-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+}
+
+.class-card i {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.class-card p {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.carousel-button {
+  background: var(--color-white);
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative; 
+  z-index: 10;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s;
+  flex-shrink: 0;
+}
+
+.carousel-button:hover {
+  background-color: #f0f0f0;
+}
+
+.carousel-button i {
+  color: var(--color-text-dark);
+}
+
+
+.bg-primary-dark { background-color: var(--color-primary-dark); }
+.bg-secondary-dark { background-color: var(--color-secondary-dark); }
+.bg-tertiary-dark { background-color: var(--color-tertiary-dark); }
+
+
+/* --- Carrossel de Turmas --- 
+.carousel-wrapper {
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel-container {
+  display: flex;
+  align-items: center;
+}
+
+.class-carousel {
+  display: flex;
+  gap: 15px;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  padding: 10px 0;
+  flex-grow: 1;
+}
+
+.class-card {
+  min-width: 220px;
+  padding: 20px;
+  border-radius: 12px;
+  color: var(--color-white);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease;
+}
+
+.class-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+}
+
+.class-card i {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.class-card p {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.carousel-button {
+  background: var(--color-white);
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s;
+}
+
+.carousel-button:hover {
+  background-color: #f0f0f0;
+}
+
+.carousel-button i {
+  color: var(--color-text-dark);
+}
+
+.bg-primary-dark { background-color: var(--color-primary-dark); }*/
+
+.action-card {
+  transition: all 0.3s ease;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.action-card-link:hover .action-card {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+
+.action-card[data-color="primary"] {
+  border-left: 5px solid var(--color-primary-dark);
+}
+.action-card[data-color="primary"] i {
+  color: var(--color-primary-dark);
+}
+.action-card-link:hover .action-card[data-color="primary"] {
+  border-color: var(--color-primary);
+}
+
+
+.action-card[data-color="secondary"] {
+  border-left: 5px solid var(--color-secondary-dark);
+}
+.action-card[data-color="secondary"] i {
+  color: var(--color-secondary-dark);
+}
+.action-card-link:hover .action-card[data-color="secondary"] {
+  border-color: var(--color-secondary);
+}
+
+.action-card[data-color="tertiary"] {
+  border-left: 5px solid var(--color-tertiary-dark);
+}
+.action-card[data-color="tertiary"] i {
+  color: var(--color-tertiary-dark);
+}
+.action-card-link:hover .action-card[data-color="tertiary"] {
+  border-color: var(--color-tertiary);
+}
+
+.btn-outline-info {
+    --bs-btn-color: var(--color-tertiary-dark);
+    --bs-btn-border-color: var(--color-tertiary-dark);
+    --bs-btn-hover-bg: var(--color-tertiary-dark);
+    --bs-btn-hover-border-color: var(--color-tertiary-dark);
+    --bs-btn-active-bg: var(--color-tertiary-dark);
+    --bs-btn-active-border-color: var(--color-tertiary-dark);
+    --bs-btn-disabled-color: var(--color-tertiary);
+    --bs-btn-disabled-border-color: var(--color-tertiary);
+}
+
+
+.table-success-light {
+    background-color: var(--color-success-light) !important;
+}
+.table-danger-light {
+    background-color: var(--color-danger-light) !important;
+}
+.table-warning-light {
+    background-color: var(--color-warning-light) !important;
+}
+
+.table-educandos tbody tr:hover {
+    background-color: #000000fb !important; 
+}
+
+
+/*    LOGIN    */
+
+.login-body {
+  margin-top: 5%;
+}
+.login-body .login-area {
+  background-color: #1652a3;
+}
+
+.login-area .login-card {
+  min-width: 300px;
+}
+
+.login-area .login-card h2 {
+  font-weight: 600;
+}
+
+.login-area .login-card .text-secondary {
+  font-weight: 700;
+}
+
+.imagem-aside h3 {
+  font-weight: 600;
+  color: var(--color-white);
+  
+}
+
+
+/*   RESPOSIVIDADE  */
+
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "sidebar"
+      "main";
+  }
+
+  #sidebar {
+    height: auto;
+    width: 100%;
+    padding: 10px;
+
+  }
+
+  .titulo-pagina {
+    text-align: center;
+  }
+
+  .header-secao {
+    padding: 15px !important;
+  }
+
+  .search-btn {
+    width: 35px;
+    height: 35px;
+  }
+
+  .header nav {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .header form {
+    flex-grow: 1;
+  }
+
+  .header form input {
+    width: 100% !important;
+  }
+}
