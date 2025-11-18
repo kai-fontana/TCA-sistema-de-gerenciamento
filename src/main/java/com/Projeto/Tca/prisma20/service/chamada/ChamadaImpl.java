@@ -12,13 +12,4 @@ public class ChamadaImpl implements ChamadaService{
     @Autowired
     EducandoRepository educandoRepository;
 
-    public Educando escolherEducando(String nomeEducando){
-        return educandoRepository.findByNome(nomeEducando);
-
-    }
-
-    @Override
-    public void deletarEducando(Educando educando) {
-        educandoRepository.delete(educando);
-    }
 }

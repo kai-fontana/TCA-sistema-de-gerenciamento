@@ -24,6 +24,15 @@ public class EducandoController {
     }
 
 
+    //Tentar mudar para ID ao invés de Nome
+    @PostMapping("/deletar")
+    public String deletarDadosEducando(@RequestParam("nomeEducando") String nomeEducando, @SessionAttribute("turmaSelecionadaId") Integer turmaId){
+        educandoImpl.deletarEducando(educandoImpl.escolherEducando(nomeEducando));
+
+        return "redirect:/educandos?turmaId=" + turmaId;
+    }
+
+
     @GetMapping("/criarEducando")
     public String criarEducando(Model model){
         Educando educando = new Educando();

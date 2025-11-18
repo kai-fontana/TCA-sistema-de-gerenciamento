@@ -46,4 +46,14 @@ if (file != null && !file.isEmpty()) {
 
         educandoRepository.save(educando);
     }
+
+    public Educando escolherEducando(String nomeEducando){
+        return educandoRepository.findByNome(nomeEducando);
+
+    }
+
+    @Override
+    public void deletarEducando(Educando educando) {
+        educandoRepository.delete(educando);
+    }
 }

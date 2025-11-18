@@ -24,9 +24,4 @@ public class ChamadaController {
         return "chamada";
     }
 
-    @PostMapping
-    public void deletarDadosdEducando(String nomeEducando){
-        chamadaImpl.deletarEducando(chamadaImpl.escolherEducando(nomeEducando));
-    }
-
 }

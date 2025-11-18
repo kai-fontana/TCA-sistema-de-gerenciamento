@@ -11,5 +11,9 @@ public interface EducandoService {
 
     public List<Educando> pegarEducandosPorTurma(Integer turmaId);
 
+    public Educando escolherEducando(String nomeEducando);
+
+    public void deletarEducando(Educando educando);
+
 
 }
