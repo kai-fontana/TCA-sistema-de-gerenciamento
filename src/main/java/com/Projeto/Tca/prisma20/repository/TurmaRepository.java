@@ -9,5 +9,4 @@ import java.util.List;
 
 @Repository
 public interface TurmaRepository extends JpaRepository<Turma, Integer> {
-    Turma findByTurma_Id(Integer turmaId);
 }

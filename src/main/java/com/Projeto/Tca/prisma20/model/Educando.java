@@ -3,6 +3,8 @@ package com.Projeto.Tca.prisma20.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Data
 @NoArgsConstructor
 @Entity
@@ -12,9 +14,11 @@ public class Educando {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String nome;
-    private int idade;
+    private LocalDate dataDeNascimento;
+    private String email;
+    private int telefone;
     @ManyToOne
-    @Column(name = "turma_id")
+    @JoinColumn(name = "turma_id")
     private Turma turma;
     @Column(name = "caminho_imagem")
     private String caminhoImagem;

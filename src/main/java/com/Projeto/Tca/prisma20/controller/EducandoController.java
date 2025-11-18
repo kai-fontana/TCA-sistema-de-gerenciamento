@@ -10,7 +10,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/educandos")
-@SessionAttributes("turmaSelecionadaId")
 public class EducandoController {
 
     @Autowired
@@ -29,16 +28,16 @@ public class EducandoController {
     public String deletarDadosEducando(@RequestParam("nomeEducando") String nomeEducando, @SessionAttribute("turmaSelecionadaId") Integer turmaId){
         educandoImpl.deletarEducando(educandoImpl.escolherEducando(nomeEducando));
 
-        return "redirect:/educandos?turmaId=" + turmaId;
+        return "redirect:/telainicial";
     }
 
 
-    @GetMapping("/criarEducando")
+    @GetMapping("/cadastro-educandos")
     public String criarEducando(Model model){
         Educando educando = new Educando();
 
         model.addAttribute("educando", educando);
-        return "cadastroEducandos";
+        return "cadastro-educandos";
     }
 
     @PostMapping("/criarEducando")
