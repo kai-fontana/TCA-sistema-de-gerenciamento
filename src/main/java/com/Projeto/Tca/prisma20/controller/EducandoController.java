@@ -1,7 +1,7 @@
 package com.Projeto.Tca.prisma20.controller;
 
 import com.Projeto.Tca.prisma20.model.Educando;
-import com.Projeto.Tca.prisma20.service.EducandoImpl;
+import com.Projeto.Tca.prisma20.service.educando.EducandoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
-@RequestMapping("/listaEducandos")
+@RequestMapping("/educandos")
 @SessionAttributes("turmaSelecionadaId")
 public class EducandoController {
 
@@ -17,15 +17,10 @@ public class EducandoController {
     private EducandoImpl educandoImpl;
 
     @GetMapping
-    public String listarEducandos(Model model, @SessionAttribute(name = "turmaSelecionadaId", required = false) Integer turmaIdSelecionada){
-        if (turmaIdSelecionada == null) {
-            return "redirect:/telainicial";
-        }
+    public String listarEducandos(Model model, @RequestParam(value = "turmaId", required = false) Integer turmaIdParam){
+        model.addAttribute("listaEducandos", educandoImpl.pegarEducandosPorTurma(turmaIdParam));
 
-
-        model.addAttribute("listaEducandos", educandoImpl.pegarEducandosPorTurma(turmaIdSelecionada));
-
-        return "turmas";
+        return "educandos";
     }
 
 

@@ -1,6 +1,6 @@
 package com.Projeto.Tca.prisma20.controller;
 import com.Projeto.Tca.prisma20.model.RequisicaoLogin;
-import com.Projeto.Tca.prisma20.service.LoginImpl;
+import com.Projeto.Tca.prisma20.service.login.LoginImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
