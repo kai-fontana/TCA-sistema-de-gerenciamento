@@ -13,7 +13,7 @@ public interface EducandoService {
 
     public Educando escolherEducando(String nomeEducando);
 
-    public void deletarEducando(Educando educando);
+    public void deletarEducando(long id);
 
 
 }

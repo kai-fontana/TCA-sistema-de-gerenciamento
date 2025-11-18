@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="css/style.css">
 
-    <title>Prisma - Turmas</title>
+    <title>Prisma - Educandos</title>
 
 </head>
 
@@ -68,7 +68,7 @@
                 <h3 class="mb-0 fw-bold">Gerenciamento de educandos</h3>
                 <p class="text-secondary">Selecione uma turma para gerenciar seus alunos.</p>
             </div>
-            <a th:href="@{/cadastro-educandos}" class="btn btn-primary-custom d-flex align-items-center">
+            <a th:href="@{/educandos/novoEducando}" class="btn btn-primary-custom d-flex align-items-center">
                 <i class="bi bi-person-plus-fill me-2"></i> Adicionar educando
             </a>
         </div>
@@ -79,19 +79,19 @@
                 <div class="mb-3">
                     <label for="selectTurma" class="form-label fw-bold">Turma selecionada:</label>
                     <select id="selectTurma" class="form-select">
-                        <option selected>JOVEM APRENDIZ  - SKILLO | 2025.2</option>
-                        <option>JOVEM APRENDIZ  - FACILITADOR DE TI | 2025.1</option>
-                        <option>JOVEM APRENDIZ  - ADMINISTRAÇÃO | 2025.2</option>
-                        <option>JOVEM APRENDIZ  - FULL-STACK SOCIAL | 2025.2</option>
-                        <option>JOVEM APRENDIZ  - ADM Hospitalar | 2026.1</option>
-                        <option>JOVEM APRENDIZ  - JARDINAGEM | 2026.1</option>
+                        <option selected>JOVEM APRENDIZ - SKILLO | 2025.2</option>
+                        <option>JOVEM APRENDIZ - FACILITADOR DE TI | 2025.1</option>
+                        <option>JOVEM APRENDIZ - ADMINISTRAÇÃO | 2025.2</option>
+                        <option>JOVEM APRENDIZ - FULL-STACK SOCIAL | 2025.2</option>
+                        <option>JOVEM APRENDIZ - ADM Hospitalar | 2026.1</option>
+                        <option>JOVEM APRENDIZ - JARDINAGEM | 2026.1</option>
                     </select>
                 </div>
 
             </div>
 
 
-            <a  class="btn in"></a>
+            <a class="btn in"></a>
             <div class="table-responsive mt-4">
                 <table class="table table-hover table-striped table-educandos">
                     <thead>
@@ -105,63 +105,19 @@
                     </thead>
                     <tbody>
 
-                    <tr th:each="educando : ${listaTurma}">
+                    <tr th:each="educando : ${listaEducandos}">
                         <td th:text="${educando.caminhoImagem}"></td>
                         <td th:text="${educando.nome}"></td>
                         <td th:text="${educando.id}"></td>
                         <td th:text="${educando.email}"></td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <img src="https://placehold.co/30x30/0dc6df/fff?text=MY" class="rounded-circle"
-                                 alt="Foto de Perfil" style="object-fit: cover;">
-                        </td>
-                        <td>Marcos Yuri Rosa de Oliveira</td>
-                        <td>000002</td>
-                        <td>marcos.yuri.rosa@gmail.com</td>
-
                         <td>
                             <button class="btn btn-sm btn-outline-secondary me-2" title="Editar"><i
                                     class="bi bi-pencil"></i></button>
-                            <button class="btn btn-sm btn-outline-danger" title="Remover"><i
-                                    class="bi bi-trash"></i></button>
+                            <a class="btn btn-sm btn-outline-danger" title="Remover" th:href="@{/educandos/deletar/{id}(id=${educando.id})}" onclick="return confirm('Tem certeza que deseja remover o educando ' + ${educando.nome} + '?');"><i
+                                    class="bi bi-trash"></i></a>
                         </td>
                     </tr>
 
-                    <tr>
-                        <td>
-                            <img src="https://placehold.co/30x30/72d416/fff?text=GB" class="rounded-circle"
-                                 alt="Foto de Perfil" style="object-fit: cover;">
-                        </td>
-                        <td>Gabriel Tavares</td>
-                        <td>000003</td>
-                        <td>gabriel.tavares@gmail.com</td>
-
-                        <td>
-                            <button class="btn btn-sm btn-outline-secondary me-2" title="Editar"><i
-                                    class="bi bi-pencil"></i></button>
-                            <button class="btn btn-sm btn-outline-danger" title="Remover"><i
-                                    class="bi bi-trash"></i></button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <img src="https://placehold.co/30x30/87d21e7fb/fff?text=LC" class="rounded-circle"
-                                 alt="Foto de Perfil" style="object-fit: cover;">
-                        </td>
-                        <td>Luis Castro</td>
-                        <td>000004</td>
-                        <td>luis.castro@gmail.com</td>
-
-                        <td>
-                            <button class="btn btn-sm btn-outline-secondary me-2" title="Editar"><i
-                                    class="bi bi-pencil"></i></button>
-                            <button class="btn btn-sm btn-outline-danger" title="Remover"><i
-                                    class="bi bi-trash"></i></button>
-                        </td>
-                    </tr>
                     </tbody>
                 </table>
             </div>

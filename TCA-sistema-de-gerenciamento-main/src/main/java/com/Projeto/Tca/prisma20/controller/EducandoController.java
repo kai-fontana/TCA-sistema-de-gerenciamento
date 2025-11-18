@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/educandos")
 public class EducandoController {
 
     @Autowired
@@ -23,38 +23,39 @@ public class EducandoController {
             model.addAttribute("turmaSelecionadaId", turmaIdParam);
             model.addAttribute("listaEducandos", educandoImpl.pegarEducandosPorTurma(turmaIdParam));
         }
-        return "templates/educandos";
+        return "educandos";
     }
 
 
     //Tentar mudar para ID ao invés de Nome
-    @PostMapping("/deletar")
-    public String deletarDadosEducando(@RequestParam("nomeEducando") String nomeEducando, @SessionAttribute("turmaSelecionadaId") Integer turmaId){
-        educandoImpl.deletarEducando(educandoImpl.escolherEducando(nomeEducando));
+    @GetMapping("/deletar/{id}")
+    public String deletarEducando(@PathVariable("id") Long id) {
 
-        return "redirect:/telainicial";
+        educandoImpl.deletarEducando(id);
+
+        return "redirect:/educandos";
     }
 
 
-    @GetMapping("/cadastro-educandos")
+    @GetMapping("/novoEducando")
     public String criarEducando(Model model){
         Educando educando = new Educando();
 
         model.addAttribute("educando", educando);
-        return "educandos";
+        return "cadastro-educandos";
     }
 
-    @PostMapping("/criarEducando")
+    @PostMapping
     public String salvarEducando(@ModelAttribute("educando")Educando educando, @RequestParam(value = "file", required = false) MultipartFile file ){
 
         try {
             educandoImpl.salvarEducando(educando, file);
         } catch (Exception e) {
             e.printStackTrace();
-            return "redirect:/criarEducando";
+            return "redirect:/educandos/novoEducando";
         }
 
-        return "redirect:/listaeducandos";
+        return "redirect:/educandos";
     }
 
 }
