@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prisma - Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="login-body">
+
+    <div class="login-area container-sm d-flex row-gap-3">
+
+        <div class="card login-card container p-4">
+            <div class="text-center mt-5 mb-5">
+                <h2 class="mb-0">PRISMA</h2>
+                <p class="text-secondary">Acesse sua conta de administrador</p>
+            </div>
+            <form action="index.html" method="GET">
+                <div class="mb-4">
+                    <label for="email" class="form-label">E-mail</label>
+                    <input type="email" class="form-control" id="email" placeholder="seu.email@exemplo.com" required>
+                </div>
+                <div class="mb-4">
+                    <label for="senha" class="form-label">Senha</label>
+                    <input type="password" class="form-control" id="senha" placeholder="********" required>
+                </div>
+                <div class="mb-4 form-check">
+                    <input type="checkbox" class="form-check-input" id="lembrar">
+                    <label class="form-check-label" for="lembrar">Lembre-me</label>
+                </div>
+                <button type="submit" class="btn btn-primary mt-4 w-100 p-2">Entrar</button>
+            </form>
+            <div class="text-center mt-3">
+                <a href="#" class="text-secondary text-decoration-none small">Esqueceu a senha?</a>
+            </div>
+        </div>
+
+        <div class="imagem-aside container-sm">
+            <h3 class="m-0 p-4">Plataforma de gerenciamento de educandos</h3>
+
+            <div class="imagem-login m-5">
+                <img src="Programmer-pana.svg" alt="" class="img-fluid">
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
