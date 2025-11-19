@@ -19,7 +19,7 @@ public class EducandoController {
     public String listarEducandos(Model model, @RequestParam(value = "turmaId", required = false) Integer turmaIdParam){
         model.addAttribute("listaEducandos", educandoImpl.pegarEducandosPorTurma(turmaIdParam));
 
-        if (turmaIdParam != null && turmaIdParam != 0) {
+        if (turmaIdParam != null || turmaIdParam != 0) {
             model.addAttribute("turmaSelecionadaId", turmaIdParam);
             model.addAttribute("listaEducandos", educandoImpl.pegarEducandosPorTurma(turmaIdParam));
         }

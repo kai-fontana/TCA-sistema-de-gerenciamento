@@ -19,7 +19,7 @@ public class TurmaController {
     public String exibirTurma(Model model, @RequestParam(value = "turmaId", required = false) Integer turmaIdParam){
         model.addAttribute("turma", turmaImpl.mostrarTurma(turmaIdParam));
 
-        if (turmaIdParam != null && turmaIdParam != 0) {
+        if (turmaIdParam != null || turmaIdParam != 0) {
             model.addAttribute("turmaSelecionadaId", turmaIdParam);
             model.addAttribute("listaEducandos", turmaImpl.mostrarTurma(turmaIdParam));
         }
