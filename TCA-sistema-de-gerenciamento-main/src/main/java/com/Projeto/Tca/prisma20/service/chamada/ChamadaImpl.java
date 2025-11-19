@@ -1,8 +1,10 @@
 package com.Projeto.Tca.prisma20.service.chamada;
 
 import com.Projeto.Tca.prisma20.model.Chamada;
+import com.Projeto.Tca.prisma20.model.ChamadaItem;
 import com.Projeto.Tca.prisma20.model.Educando;
 import com.Projeto.Tca.prisma20.model.Turma;
+import com.Projeto.Tca.prisma20.repository.ChamadaItemRepository;
 import com.Projeto.Tca.prisma20.repository.ChamadaRepository;
 import com.Projeto.Tca.prisma20.repository.EducandoRepository;
 import com.Projeto.Tca.prisma20.repository.TurmaRepository;
@@ -20,6 +22,9 @@ public class ChamadaImpl implements ChamadaService{
     ChamadaRepository chamadaRepository;
 
     @Autowired
+    ChamadaItemRepository chamadaItemRepository;
+
+    @Autowired
     EducandoRepository educandoRepository;
 
     @Autowired
@@ -33,32 +38,33 @@ public class ChamadaImpl implements ChamadaService{
 
         LocalDate hoje = LocalDate.now();
 
+        Chamada chamada = new Chamada();
+        chamada.setDataChamada(hoje);
+        chamada.setTurma(turma);
+
         for (Map.Entry<String, String> entry : statusPresencaMap.entrySet()) {
 
             String chaveComPrefixo = entry.getKey();
-            String valorString = entry.getValue();
+            String status = entry.getValue();
 
             Long educandoId;
             try {
 
-                educandoId = Long.parseLong(chaveComPrefixo.replaceAll("[^0-9]", ""));
+                educandoId = Long.parseLong(chaveComPrefixo);
             } catch (NumberFormatException e) {
 
                 continue;
             }
 
-            Boolean status = Boolean.parseBoolean(valorString);
-
             Educando educando = educandoRepository.findById(educandoId)
                     .orElseThrow(() -> new RuntimeException("Educando não encontrado: " + educandoId));
 
-            Chamada item = new Chamada();
-            item.setDataChamada(hoje);
+            ChamadaItem item = new ChamadaItem();
+            item.setPresenca(status);
             item.setEducando(educando);
-            item.setTurma(turma);
-            item.setPresente(status);
+            item.setChamada(chamada);
 
-            chamadaRepository.save(item);
+            chamadaItemRepository.save(item);
         }
     }
 

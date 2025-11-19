@@ -104,13 +104,10 @@
 
                     <div class="mb-3">
                         <label for="selectTurma" class="form-label fw-bold">Turma selecionada:</label>
-                        <select id="selectTurma" class="form-select">
-                            <option selected>JOVEM APRENDIZ  - SKILLO | 2025.2</option>
-                            <option>JOVEM APRENDIZ  - FACILITADOR DE TI | 2025.1</option>
-                            <option>JOVEM APRENDIZ  - ADMINISTRAÇÃO | 2025.2</option>
-                            <option>JOVEM APRENDIZ  - FULL-STACK SOCIAL | 2025.2</option>
-                            <option>JOVEM APRENDIZ  - ADM Hospitalar | 2026.1</option>
-                            <option>JOVEM APRENDIZ  - JARDINAGEM | 2026.1</option>
+                        <select id="selectTurma" class="form-select" th:each="turma : ${listaTurmas}">
+                            <option th:text="" selected>Selecione...</option>
+                            <option th:text="${turma.nome}"></option>
+
                         </select>
                     </div>
 

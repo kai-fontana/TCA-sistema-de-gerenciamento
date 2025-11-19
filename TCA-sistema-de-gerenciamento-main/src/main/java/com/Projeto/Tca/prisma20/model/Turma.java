@@ -14,6 +14,7 @@ public class Turma {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nome;
+    private String descricao;
     private String turno;
     @Column(name = "educador_regente")
     private String educadorRegente;
