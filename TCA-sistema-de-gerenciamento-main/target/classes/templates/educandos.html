@@ -54,9 +54,9 @@
         </div>
         <hr>
         <div class="text-sumario">
-            <a href="turmas.html"><i class="bi bi-people-fill me-2"></i>Turmas</a>
-            <a href="educandos.html"><i class="bi bi-person-video3 me-2"></i>Educandos</a>
-            <a href="chamada.html"><i class="bi bi-list-check me-2"></i>Chamada</a>
+            <a th:href="@{/turmas}"><i class="bi bi-people-fill me-2"></i>Turmas</a>
+            <a th:href="@{/educandos}"><i class="bi bi-person-video3 me-2"></i>Educandos</a>
+            <a th:href="@{/educandos/chamada}"><i class="bi bi-list-check me-2"></i>Chamada</a>
 
         </div>
     </aside>
@@ -76,17 +76,21 @@
         <div class="card shadow-sm p-4">
 
             <div class="d-flex justify-content-between">
-                <div class="mb-3">
-                    <label for="selectTurma" class="form-label fw-bold">Turma selecionada:</label>
-                    <select id="selectTurma" class="form-select">
-                        <option selected>JOVEM APRENDIZ - SKILLO | 2025.2</option>
-                        <option>JOVEM APRENDIZ - FACILITADOR DE TI | 2025.1</option>
-                        <option>JOVEM APRENDIZ - ADMINISTRAÇÃO | 2025.2</option>
-                        <option>JOVEM APRENDIZ - FULL-STACK SOCIAL | 2025.2</option>
-                        <option>JOVEM APRENDIZ - ADM Hospitalar | 2026.1</option>
-                        <option>JOVEM APRENDIZ - JARDINAGEM | 2026.1</option>
-                    </select>
-                </div>
+                <form th:action="@{/educandos}" method="GET" id="formSelecaoTurma">
+                    <div class="mb-3">
+                        <label for="selectTurma" class="form-label fw-bold">Turma selecionada:</label>
+                        <select id="selectTurma" class="form-select" name="turmaId" onchange="document.getElementById('formSelecaoTurma').submit()" required >
+                            <option value="0" th:if="${turmaSelecionadaId == null}" selected>Selecione uma turma</option>
+                            <option
+                                    th:each="turma : ${listaDeTurmas}"
+                                    th:value="${turma.id}"
+                                    th:text="${turma.nome}">
+                            </option>
+
+                        </select>
+                    </div>
+                </form>
+
 
             </div>
 

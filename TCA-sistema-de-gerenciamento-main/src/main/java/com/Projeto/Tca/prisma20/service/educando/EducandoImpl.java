@@ -23,6 +23,9 @@ public class EducandoImpl implements EducandoService {
         return educandoRepository.findByTurma_Id(turmaId);
     }
 
+    public List<Educando> pegarTodosEducandos() {
+        return educandoRepository.findAll();
+    }
 
     private static final String ATUALIZAR_DIR = "src/main/resources/static/images/";
 

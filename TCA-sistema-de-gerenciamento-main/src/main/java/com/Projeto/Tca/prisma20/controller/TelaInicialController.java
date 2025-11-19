@@ -16,7 +16,7 @@ public class TelaInicialController {
 
     @GetMapping
     public String exibirTurmas(Model model, @RequestParam(value = "turmaId", required = false) Integer turmaIdParam){
-        if (turmaIdParam != null || turmaIdParam != 0) {
+        if (turmaIdParam != null && turmaIdParam != 0) {
             model.addAttribute("turmaSelecionadaId", turmaIdParam);
             return "redirect:/listaEducandos";
         }

@@ -12,7 +12,7 @@ import java.util.List;
 public class Turma {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
     private String nome;
     private String turno;
     @Column(name = "educador_regente")

@@ -41,7 +41,7 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="../../../../test-front-end/index.html">Logout</a></li>
+                        <li><a class="dropdown-item" href="index.html">Logout</a></li>
                     </ul>
                 </div>
             </nav>
@@ -50,13 +50,13 @@
 
         <aside id="sidebar">
             <div class="titulo-pagina">
-                <h3><a href="../../../../test-front-end/index.html">PRISMA</a></h3>
+                <h3><a href="index.html">PRISMA</a></h3>
             </div>
             <hr>
             <div class="text-sumario">
-                <a href="turmas.html"><i class="bi bi-people-fill me-2"></i>Turmas</a>
-                <a href="../../../../test-front-end/educandos.html"><i class="bi bi-person-video3 me-2"></i>Educandos</a>
-                <a href="../../../../test-front-end/chamada.html"><i class="bi bi-list-check me-2"></i>Chamada</a>
+                <a th:href="@{/turmas}"><i class="bi bi-people-fill me-2"></i>Turmas</a>
+                <a th:href="@{/educandos}"><i class="bi bi-person-video3 me-2"></i>Educandos</a>
+                <a th:href="@{/chamada}"><i class="bi bi-list-check me-2"></i>Chamada</a>
 
             </div>
         </aside>
@@ -68,7 +68,7 @@
                     <h3 class="mb-0 fw-bold">Turmas disponíveis</h3>
                     <p class="text-secondary">Selecione aqui uma turma para gerenciar.</p>
                 </div>
-                <a href="cadastro-turmas.html" class="btn btn-primary-custom d-flex align-items-center">
+                <a th:href="@{/turmas/novaTurma}" class="btn btn-primary-custom d-flex align-items-center">
                     <i class="bi bi-person-plus-fill me-2"></i> Adicionar turma
                 </a>
             </div>
@@ -79,208 +79,31 @@
                     <table class="table table-hover table-striped table-educandos">
                         <thead>
                             <tr>
+                                <th scope="col"><p class="ms-5">Id</p></th>
                                 <th scope="col"><p class="ms-5">Nome da turma</p></th>
                                 <th scope="col"><p class="ms-3 w-100" style="width: 100px;">Período letivo</p></th>
-                                <th scope="col" class="me-4 ms-4"><p  style="text-align: center;">Descrição</p></th>
                                 <th scope="col"><p class="ms-4">Educador responsável</p></th>
-                                <th scope="col"><p class="ms-3">Data de início</p></th>
                                 <th scope="col"><p class="ms-3">Editar</p></th>
                             </tr>
                         </thead>
                         <tbody>
 
-                            <tr>
-                                <td>JOVEM APRENDIZ - SKILLO | 2025.2</td>
-                                <td>
+                            <tr th:each="turma : ${listaTurmas}">
+                                <td th:text="${turma.id}"></td>
+                                <td th:text="${turma.nome}"></td>
+                                <td th:text="${turma.turno}">
                                     <select id="selectTurma" class="form-select me-4 ms-2 w-100">
                                         <option selected>2025/1</option>
                                         <option>2025/2</option>
                                         <option>2026/1</option>
                                     </select>
                                 </td>
-                                <td>
-                                    <p class="w-75 ms-5" style="text-align: justify;">
-                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque minus non
-                                        deserunt
-                                        excepturi iusto hic nostrum beatae. Ipsa reiciendis repudiandae asperiores
-                                        natus,
-                                        enim qui quidem blanditiis, sapiente iste, dolorem perspiciatis!
-                                    </p>
-                                </td>
-                                <td>
-                                    <select id="selectTurma" class="form-select me-4 ms-2 w-75">
-                                        <option selected>Rodrigo Bergenthal</option>
-                                        <option>Heregon</option>
-                                        <option>Andrielly</option>
-                                        <option>Júlia</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <input type="date" id="dataChamada" class="form-control" style="width: 150px;"
-                                        value="" required>
-                                </td>
-
+                                <td th:text="${turma.educadorRegente}"></td>
                                 <td>
                                     <button class="btn btn-sm btn-outline-secondary me-2" title="Editar"><i
                                             class="bi bi-pencil"></i></button>
-                                    <button class="btn btn-sm btn-outline-danger" title="Remover"><i
-                                            class="bi bi-trash"></i></button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>JOVEM APRENDIZ - FULL-STACK SOCIAL | 2025.2</td>
-                                <td>
-                                    <select id="selectTurma" class="form-select me-4 ms-2 w-100">
-                                        <option selected>2025/1</option>
-                                        <option>2025/2</option>
-                                        <option>2026/1</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <p class="w-75 ms-5" style="text-align: justify;">
-                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque minus non
-                                        deserunt
-                                        excepturi iusto hic nostrum beatae. Ipsa reiciendis repudiandae asperiores
-                                        natus,
-                                        enim qui quidem blanditiis, sapiente iste, dolorem perspiciatis!
-                                    </p>
-                                </td>
-                                <td>
-                                    <select id="selectTurma" class="form-select me-4 ms-2 w-75">
-                                        <option selected>Rodrigo Bergenthal</option>
-                                        <option>Heregon</option>
-                                        <option>Andrielly</option>
-                                        <option>Júlia</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <input type="date" id="dataChamada" class="form-control" style="width: 150px;"
-                                        value="" required>
-                                </td>
-
-                                <td>
-                                    <button class="btn btn-sm btn-outline-secondary me-2" title="Editar"><i
-                                            class="bi bi-pencil"></i></button>
-                                    <button class="btn btn-sm btn-outline-danger" title="Remover"><i
-                                            class="bi bi-trash"></i></button>
-                                </td>
-                            </tr>
-
-                            <trO>
-                                <td>JVEM APRENDIZ - ADMINISTRAÇÃO | 2025.2</td>
-                                <td>
-                                    <select id="selectTurma" class="form-select me-4 ms-2 w-100">
-                                        <option selected>2025/1</option>
-                                        <option>2025/2</option>
-                                        <option>2026/1</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <p class="w-75 ms-5" style="text-align: justify;">
-                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque minus non
-                                        deserunt
-                                        excepturi iusto hic nostrum beatae. Ipsa reiciendis repudiandae asperiores
-                                        natus,
-                                        enim qui quidem blanditiis, sapiente iste, dolorem perspiciatis!
-                                    </p>
-                                </td>
-                                <td>
-                                    <select id="selectTurma" class="form-select me-4 ms-2 w-75">
-                                        <option selected>Rodrigo Bergenthal</option>
-                                        <option>Heregon</option>
-                                        <option>Andrielly</option>
-                                        <option>Júlia</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <input type="date" id="dataChamada" class="form-control" style="width: 150px;"
-                                        value="" required>
-                                </td>
-
-                                <td>
-                                    <button class="btn btn-sm btn-outline-secondary me-2" title="Editar"><i
-                                            class="bi bi-pencil"></i></button>
-                                    <button class="btn btn-sm btn-outline-danger" title="Remover"><i
-                                            class="bi bi-trash"></i></button>
-                                </td>
-                            </trO>
-
-                            <tr>
-                                <td>JOVEM APRENDIZ - JARDINAGEM | 2026.1</td>
-                                <td>
-                                    <select id="selectTurma" class="form-select me-4 ms-2 w-100">
-                                        <option selected>2025/1</option>
-                                        <option>2025/2</option>
-                                        <option>2026/1</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <p class="w-75 ms-5" style="text-align: justify;">
-                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque minus non
-                                        deserunt
-                                        excepturi iusto hic nostrum beatae. Ipsa reiciendis repudiandae asperiores
-                                        natus,
-                                        enim qui quidem blanditiis, sapiente iste, dolorem perspiciatis!
-                                    </p>
-                                </td>
-                                <td>
-                                    <select id="selectTurma" class="form-select me-4 ms-2 w-75">
-                                        <option selected>Rodrigo Bergenthal</option>
-                                        <option>Heregon</option>
-                                        <option>Andrielly</option>
-                                        <option>Júlia</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <input type="date" id="dataChamada" class="form-control" style="width: 150px;"
-                                        value="" required>
-                                </td>
-
-                                <td>
-                                    <button class="btn btn-sm btn-outline-secondary me-2" title="Editar"><i
-                                            class="bi bi-pencil"></i></button>
-                                    <button class="btn btn-sm btn-outline-danger" title="Remover"><i
-                                            class="bi bi-trash"></i></button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>JOVEM APRENDIZ - FACILITADOR DE TI | 2025.1</td>
-                                <td>
-                                    <select id="selectTurma" class="form-select me-4 ms-2 w-100">
-                                        <option selected>2025/1</option>
-                                        <option>2025/2</option>
-                                        <option>2026/1</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <p class="w-75 ms-5" style="text-align: justify;">
-                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque minus non
-                                        deserunt
-                                        excepturi iusto hic nostrum beatae. Ipsa reiciendis repudiandae asperiores
-                                        natus,
-                                        enim qui quidem blanditiis, sapiente iste, dolorem perspiciatis!
-                                    </p>
-                                </td>
-                                <td>
-                                    <select id="selectTurma" class="form-select me-2 ms-2 w-75">
-                                        <option selected>Rodrigo Bergenthal</option>
-                                        <option>Heregon</option>
-                                        <option>Andrielly</option>
-                                        <option>Júlia</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <input type="date" id="dataChamada" class="form-control" style="width: 150px;"
-                                        value="" required>
-                                </td>
-
-                                <td>
-                                    <button class="btn btn-sm btn-outline-secondary me-2" title="Editar"><i
-                                            class="bi bi-pencil"></i></button>
-                                    <button class="btn btn-sm btn-outline-danger" title="Remover"><i
-                                            class="bi bi-trash"></i></button>
+                                    <a class="btn btn-sm btn-outline-danger" title="Remover" th:href="@{/turmas/deletar/{id}(id=${turma.id})}" onclick="return confirm('Tem certeza que deseja remover o educando ' + ${educando.nome} + '?');"><i
+                                            class="bi bi-trash"></i></a>
                                 </td>
                             </tr>
                         </tbody>

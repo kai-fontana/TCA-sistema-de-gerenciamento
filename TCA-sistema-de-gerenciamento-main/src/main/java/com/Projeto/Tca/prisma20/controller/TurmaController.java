@@ -17,32 +17,42 @@ public class TurmaController {
 
     @GetMapping
     public String exibirTurma(Model model, @RequestParam(value = "turmaId", required = false) Integer turmaIdParam){
-        model.addAttribute("turma", turmaImpl.mostrarTurma(turmaIdParam));
+        model.addAttribute("listaTurmas", turmaImpl.listarTurmas());
 
-        if (turmaIdParam != null || turmaIdParam != 0) {
-            model.addAttribute("turmaSelecionadaId", turmaIdParam);
-            model.addAttribute("listaEducandos", turmaImpl.mostrarTurma(turmaIdParam));
-        }
         return "turmas";
 
     }
 
-    @GetMapping("/criarturma")
+    @GetMapping("/novaTurma")
     public String criarTurma(Model model){
         Turma turma = new Turma();
 
         model.addAttribute("turma", turma);
-        return "cadastroTurmas";
+        return "cadastro-turmas";
     }
 
-    @PostMapping("/criarturma")
+    @PostMapping
     public String salvarTurma(@ModelAttribute("turma") Turma turma, RedirectAttributes ra){
 
-        turmaImpl.salvarTurma(turma);
+        System.out.println("Nome da Turma Recebida: " + turma.getNome());
 
         //ra.addFlashAttribute("mensagemSucesso", "Turma criada com sucesso!");
 
-        //redirect: salva os dados e recarrega a página para um novo endereço "/criar-turma", deixando de lado o salvamento recém feito
-        return "redirect:/telainicial/criarturma";
+        try {
+            turmaImpl.salvarTurma(turma);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/turmas/novaTurma";
+        }
+
+        return "redirect:/turmas";
+    }
+
+    @GetMapping("/deletar/{id}") // URL: /turmas/deletar/{id}
+    public String deletarTurma(@PathVariable("id") Long id) {
+
+        turmaImpl.deletarTurma(id);
+
+        return "redirect:/turmas";
     }
 }

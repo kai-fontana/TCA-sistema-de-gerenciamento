@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface TurmaRepository extends JpaRepository<Turma, Integer> {
+public interface TurmaRepository extends JpaRepository<Turma, Long> {
 }
