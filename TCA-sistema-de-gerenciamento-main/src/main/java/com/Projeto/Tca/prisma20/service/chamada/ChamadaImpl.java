@@ -30,6 +30,9 @@ public class ChamadaImpl implements ChamadaService{
     @Autowired
     TurmaRepository turmaRepository;
 
+    int dias;
+    double porcentagemPresenca;
+
     @Transactional
     public void salvarChamada(Long turmaId, Map<String, String> statusPresencaMap) {
 
@@ -47,6 +50,7 @@ public class ChamadaImpl implements ChamadaService{
             String chaveComPrefixo = entry.getKey();
             String status = entry.getValue();
 
+
             Long educandoId;
             try {
 
@@ -58,6 +62,13 @@ public class ChamadaImpl implements ChamadaService{
 
             Educando educando = educandoRepository.findById(educandoId)
                     .orElseThrow(() -> new RuntimeException("Educando não encontrado: " + educandoId));
+
+            if (status.equalsIgnoreCase("F")){
+                educando.setQuantidadePresencas(educando.getQuantidadePresencas() + 1);
+            }
+            dias++;
+            porcentagemPresenca = educando.getQuantidadePresencas() / dias;
+            educando.setAssiduidade(porcentagemPresenca);
 
             ChamadaItem item = new ChamadaItem();
             item.setPresenca(status);

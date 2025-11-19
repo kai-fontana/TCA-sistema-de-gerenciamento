@@ -22,6 +22,8 @@ public class Educando {
     private Turma turma;
     @Column(name = "caminho_imagem")
     private String caminhoImagem;
+    private int quantidadePresencas;
+    private double assiduidade;
     private String observacoes;
 
 }
