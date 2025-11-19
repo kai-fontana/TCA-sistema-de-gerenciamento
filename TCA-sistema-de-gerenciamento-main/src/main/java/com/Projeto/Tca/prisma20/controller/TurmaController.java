@@ -32,11 +32,10 @@ public class TurmaController {
     }
 
     @PostMapping
-    public String salvarTurma(@ModelAttribute("turma") Turma turma, RedirectAttributes ra){
+    public String salvarTurma(@ModelAttribute("turma") Turma turma){
 
         System.out.println("Nome da Turma Recebida: " + turma.getNome());
 
-        //ra.addFlashAttribute("mensagemSucesso", "Turma criada com sucesso!");
 
         try {
             turmaImpl.salvarTurma(turma);

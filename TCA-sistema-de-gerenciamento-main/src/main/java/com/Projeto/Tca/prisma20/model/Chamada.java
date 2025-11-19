@@ -8,8 +8,8 @@ import java.time.LocalDate;
 public class Chamada {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id; private
-    LocalDate dataChamada;
+    private int id;
+    private LocalDate dataChamada;
     @ManyToOne
     @JoinColumn(name = "educando_id")
     private Educando educando;
@@ -17,5 +17,5 @@ public class Chamada {
     @JoinColumn(name = "turma_id")
     private Turma turma;
     @Column(nullable = false)
-    private String presenca;
+    private boolean presente;
 }
