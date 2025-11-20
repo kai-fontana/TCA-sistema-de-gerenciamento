@@ -1,7 +1,8 @@
 package com.Projeto.Tca.prisma20.service.chamada;
 
-import com.Projeto.Tca.prisma20.model.Educando;
+
+import java.util.Map;
 
 public interface ChamadaService {
-
+    public void salvarChamada(Long turmaId, Map<String, String> statusPresencaMap);
 }

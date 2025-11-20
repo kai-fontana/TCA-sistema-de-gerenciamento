@@ -18,13 +18,16 @@ public class EducandoImpl implements EducandoService {
     @Autowired
     private EducandoRepository educandoRepository;
 
-    private static final String ATUALIZAR_DIR = "src/main/resources/static/images/";
-
     @Override
     public List<Educando> pegarEducandosPorTurma(Integer turmaId) {
         return educandoRepository.findByTurma_Id(turmaId);
     }
 
+    public List<Educando> pegarTodosEducandos() {
+        return educandoRepository.findAll();
+    }
+
+    private static final String ATUALIZAR_DIR = "src/main/resources/static/images/";
 
     public void salvarEducando(Educando educando, MultipartFile file) throws Exception {
         if (file != null && !file.isEmpty()) {
@@ -34,18 +37,25 @@ public class EducandoImpl implements EducandoService {
             Files.copy(file.getInputStream(), caminhoDestino, StandardCopyOption.REPLACE_EXISTING);
             String caminhoPublico = "/images/" + nomeArquivo;
             educando.setCaminhoImagem(caminhoPublico);
-        }
+
+
+        } /*else if (educando.getId() != 0) {
+    Educando educandoExistente = educandoRepository.findById(educando.getId())
+            .orElseThrow(() -> new Exception("Produto não encontrado"));
+
+    educando.setCaminhoImagem(educandoExistente.getCaminhoImagem());
+}*/
 
         educandoRepository.save(educando);
     }
 
-    public Educando escolherEducando(String nomeEducando){
+    public Educando escolherEducando(String nomeEducando) {
         return educandoRepository.findByNome(nomeEducando);
 
     }
 
     @Override
-    public void deletarEducando(Educando educando) {
-        educandoRepository.delete(educando);
+    public void deletarEducando(long id) {
+        educandoRepository.deleteById(id);
     }
 }

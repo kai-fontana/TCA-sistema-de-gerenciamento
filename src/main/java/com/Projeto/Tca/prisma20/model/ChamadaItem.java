@@ -3,17 +3,17 @@ package com.Projeto.Tca.prisma20.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.LocalDate;
-
 @Data
 @Entity
-public class Chamada {
+@Table(name = "chamada_item")
+public class ChamadaItem {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @Column(name = "data_chamada")
-    private LocalDate dataChamada;
+    private String presenca;
     @ManyToOne
-    @JoinColumn(name = "turma_id")
-    private Turma turma;
+    private Educando educando;
+    @ManyToOne
+    private Chamada chamada;
+
 }

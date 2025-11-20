@@ -5,6 +5,7 @@ import com.Projeto.Tca.prisma20.repository.TurmaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -14,14 +15,28 @@ public class TurmaImpl implements TurmaService {
     private TurmaRepository turmaRepository;
 
     @Override
+    public Optional<Turma> mostrarTurma(Integer turmaId) {
+        return Optional.empty();
+    }
+
+    @Override
     public Turma salvarTurma(Turma turma) {
         return turmaRepository.save(turma);
     }
 
 
     @Override
-    public Optional<Turma> mostrarTurma(Integer turmaId) {
+    public Optional<Turma> mostrarTurma(Long turmaId) {
         return turmaRepository.findById(turmaId);
     }
 
+    @Override
+    public List<Turma> listarTurmas() {
+        return turmaRepository.findAll();
+    }
+
+
+    public void deletarTurma(long id) {
+        turmaRepository.deleteById(id);
+    }
 }

@@ -12,16 +12,18 @@ import java.time.LocalDate;
 public class Educando {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
     private String nome;
     private LocalDate dataDeNascimento;
     private String email;
-    private int telefone;
+    private String telefone;
     @ManyToOne
     @JoinColumn(name = "turma_id")
     private Turma turma;
     @Column(name = "caminho_imagem")
     private String caminhoImagem;
+    private int quantidadePresencas;
+    private double assiduidade;
     private String observacoes;
 
 }

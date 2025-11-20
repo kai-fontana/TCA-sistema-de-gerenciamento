@@ -17,26 +17,42 @@ public class TurmaController {
 
     @GetMapping
     public String exibirTurma(Model model, @RequestParam(value = "turmaId", required = false) Integer turmaIdParam){
-        if (turmaIdParam != null && turmaIdParam != 0) {
-            model.addAttribute("turma", turmaImpl.mostrarTurma(turmaIdParam));
-        }
+        model.addAttribute("listaTurmas", turmaImpl.listarTurmas());
+
         return "turmas";
 
     }
 
-    @GetMapping("/criarturma")
+    @GetMapping("/novaTurma")
     public String criarTurma(Model model){
         Turma turma = new Turma();
 
         model.addAttribute("turma", turma);
-        return "cadastroTurmas";
+        return "cadastro-turmas";
     }
 
-    @PostMapping("/criarturma")
+    @PostMapping
     public String salvarTurma(@ModelAttribute("turma") Turma turma, RedirectAttributes ra){
 
-        turmaImpl.salvarTurma(turma);
+        System.out.println("Nome da Turma Recebida: " + turma.getNome());
 
-        return "redirect:/telainicial/criarturma";
+        //ra.addFlashAttribute("mensagemSucesso", "Turma criada com sucesso!");
+
+        try {
+            turmaImpl.salvarTurma(turma);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/turmas/novaTurma";
+        }
+
+        return "redirect:/turmas";
+    }
+
+    @GetMapping("/deletar/{id}") // URL: /turmas/deletar/{id}
+    public String deletarTurma(@PathVariable("id") Long id) {
+
+        turmaImpl.deletarTurma(id);
+
+        return "redirect:/turmas";
     }
 }
