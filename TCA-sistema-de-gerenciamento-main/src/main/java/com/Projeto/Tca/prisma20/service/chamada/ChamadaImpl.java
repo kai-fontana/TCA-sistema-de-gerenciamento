@@ -48,7 +48,6 @@ public class ChamadaImpl implements ChamadaService{
 
             Long educandoId;
             try {
-
                 educandoId = Long.parseLong(chaveComPrefixo);
             } catch (NumberFormatException e) {
 
@@ -58,7 +57,7 @@ public class ChamadaImpl implements ChamadaService{
             Educando educando = educandoRepository.findById(educandoId)
                     .orElseThrow(() -> new RuntimeException("Educando não encontrado: " + educandoId));
 
-            if (status.equalsIgnoreCase("F")){
+            if (status.equalsIgnoreCase("P")){
                 educando.setQuantidadePresencas(educando.getQuantidadePresencas() + 1);
             }
             dias++;

@@ -11,6 +11,4 @@ import java.util.Optional;
 @Repository
 public interface EducandoRepository extends JpaRepository<Educando, Long> {
     List<Educando> findByTurma_Id(Integer turmaId);
-
-    Educando findByNome(String educandoNome);
 }

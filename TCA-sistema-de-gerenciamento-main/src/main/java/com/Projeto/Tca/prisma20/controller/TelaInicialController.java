@@ -19,20 +19,14 @@ public class TelaInicialController {
     TelaInicialImpl telaInicialImpl;
 
     @GetMapping
-    public String exibirTurmas(Model model, @RequestParam(value = "turmaId", required = false) Integer turmaIdParam){
-
-        if (turmaIdParam != null && turmaIdParam != 0) {
-            model.addAttribute("turmaSelecionadaId", turmaIdParam);
-            return "redirect:/educandos";
-        }
-
+    public String exibirTurmas(Model model){
         try {
             logger.info("Carregando todas as turmas...");
-            model.addAttribute("turmas", telaInicialImpl.pegarTodasTurmas()); // <--- A falha está provavelmente aqui!
+            model.addAttribute("turmas", telaInicialImpl.pegarTodasTurmas());
             logger.info("Turmas carregadas com sucesso. Renderizando view 'index'.");
         } catch (Exception e) {
             logger.error("ERRO ao carregar turmas para a página inicial: {}", e.getMessage(), e);
-            model.addAttribute("turmas", new java.util.ArrayList<>()); // Evita quebra do Thymeleaf
+            model.addAttribute("turmas", new java.util.ArrayList<>());
         }
 
         return "index";

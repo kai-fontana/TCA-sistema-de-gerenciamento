@@ -12,8 +12,4 @@ public class Login {
     private int id;
     private String email;
     private String senha;
-
-
 }
-
-//    private EsqueciSENHA

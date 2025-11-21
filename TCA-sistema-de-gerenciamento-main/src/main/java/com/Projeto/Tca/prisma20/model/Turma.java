@@ -15,6 +15,7 @@ public class Turma {
     private Long id;
     private String nome;
     private String turno;
+    private String descricao;
     @Column(name = "educador_regente")
     private String educadorRegente;
     @Column(name = "lista_turma")

@@ -11,8 +11,6 @@ public interface EducandoService {
 
     List<Educando> pegarEducandosPorTurma(Integer turmaId);
 
-    Educando escolherEducando(String nomeEducando);
-
     void deletarEducando(long id);
 
     Educando acharEducandoPorId(Long idEducando);

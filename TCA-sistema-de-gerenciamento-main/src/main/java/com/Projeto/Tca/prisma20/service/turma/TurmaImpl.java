@@ -15,19 +15,8 @@ public class TurmaImpl implements TurmaService {
     private TurmaRepository turmaRepository;
 
     @Override
-    public Optional<Turma> mostrarTurma(Integer turmaId) {
-        return Optional.empty();
-    }
-
-    @Override
     public Turma salvarTurma(Turma turma) {
         return turmaRepository.save(turma);
-    }
-
-
-    @Override
-    public Optional<Turma> mostrarTurma(Long turmaId) {
-        return turmaRepository.findById(turmaId);
     }
 
     @Override
@@ -43,7 +32,7 @@ public class TurmaImpl implements TurmaService {
     @Override
     public Turma acharTurmaPorId(Long idTurma) {
         return turmaRepository.findById(idTurma)
-                .orElseThrow();
+                .orElseThrow(() -> new RuntimeException("ID não encontrado: " + idTurma));
     }
 
 

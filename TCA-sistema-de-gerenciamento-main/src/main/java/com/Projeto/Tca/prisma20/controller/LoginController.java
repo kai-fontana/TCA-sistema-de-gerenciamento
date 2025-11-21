@@ -37,7 +37,6 @@ public class LoginController {
         logger.info("Tentativa de login recebida para o email: {}", compararEmail);
 
         if (loginimpl.autenticar(compararEmail, compararSenha)){
-            //session.setAttribute("usuarioLogado", loginReq.getEmailReq());
             logger.info("Login bem-sucedido. Redirecionando para /index.");
             return "redirect:/index";
         } else {
