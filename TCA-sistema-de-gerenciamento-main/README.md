@@ -1,1 +1,0 @@
-# TCA-sistema-de-gerenciamento
