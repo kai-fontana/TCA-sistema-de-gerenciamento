@@ -23,10 +23,6 @@ public class EducandoImpl implements EducandoService {
         return educandoRepository.findByTurma_Id(turmaId);
     }
 
-    public List<Educando> pegarTodosEducandos() {
-        return educandoRepository.findAll();
-    }
-
     private static final String ATUALIZAR_DIR = "src/main/resources/static/images/";
 
     public void salvarEducando(Educando educando, MultipartFile file) throws Exception {
@@ -44,10 +40,6 @@ public class EducandoImpl implements EducandoService {
         educandoRepository.save(educando);
     }
 
-    public Educando escolherEducando(String nomeEducando) {
-        return educandoRepository.findByNome(nomeEducando);
-
-    }
 
     @Override
     public void deletarEducando(long id) {

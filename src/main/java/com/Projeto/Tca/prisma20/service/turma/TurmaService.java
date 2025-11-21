@@ -7,11 +7,7 @@ import java.util.Optional;
 
 public interface TurmaService {
 
-    Optional<Turma> mostrarTurma(Integer turmaId);
-
     Turma salvarTurma(Turma turma);
-
-    Optional<Turma> mostrarTurma(Long turmaId);
 
     List<Turma> listarTurmas();
 

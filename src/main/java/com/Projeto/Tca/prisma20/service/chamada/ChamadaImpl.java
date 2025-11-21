@@ -68,7 +68,6 @@ public class ChamadaImpl implements ChamadaService{
                     .orElseThrow(() -> new RuntimeException("Educando não encontrado: " + educandoId));
 
             if (status.equalsIgnoreCase("P")){
-                // Assumo que getQuantidadePresencas é o contador de presenças.
                 educando.setQuantidadePresencas(educando.getQuantidadePresencas() + 1);
                 educandoRepository.save(educando);
             }
