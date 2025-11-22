@@ -1,5 +1,3 @@
-# TCA-sistema-de-gerenciamento
-
 # Prisma Project 2.0: Student Management System
 
 Prisma 2.0 is a **Final Learning Project** that consists of developing a student registration and management system. The initiative arose from the need of the _Centro Social Marista (CESMAR)_ Learning Center to replace the old system (_Prisma_), which will be discontinued. The project aims to provide a concise, well-structured, and executable platform for the administrative area.
@@ -91,3 +89,4 @@ The project was developed as a team by:
 - Marcos Yuri Rosa de Oliveira
 
 [Link do Canva](https://www.canva.com/design/DAG45SW1Ark/4-ApmXU5rnh2xsZDSLA0vA/view?utm_content=DAG45SW1Ark&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h5c2f742250)
+
