@@ -3,11 +3,14 @@ package com.Projeto.Tca.prisma20.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
+
 import java.util.List;
 
 
 @Data
 @Entity
+@ToString(exclude = "educandos")
 @Table(name = "cursos")
 public class Turma {
     @Id

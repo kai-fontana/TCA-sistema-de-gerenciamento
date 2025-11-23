@@ -5,6 +5,7 @@ import com.Projeto.Tca.prisma20.model.ChamadaItem;
 import com.Projeto.Tca.prisma20.model.Educando;
 import com.Projeto.Tca.prisma20.model.Turma;
 import com.Projeto.Tca.prisma20.repository.ChamadaItemRepository;
+import com.Projeto.Tca.prisma20.repository.ChamadaRepository;
 import com.Projeto.Tca.prisma20.repository.EducandoRepository;
 import com.Projeto.Tca.prisma20.repository.TurmaRepository;
 import jakarta.transaction.Transactional;
@@ -25,32 +26,39 @@ public class ChamadaImpl implements ChamadaService{
     ChamadaItemRepository chamadaItemRepository;
 
     @Autowired
+    ChamadaRepository chamadaRepository;
+
+    @Autowired
     EducandoRepository educandoRepository;
 
     @Autowired
     TurmaRepository turmaRepository;
 
     @Transactional
-    public void salvarChamada(Long turmaId, Map<String, String> statusPresencaMap) {
+    @Override
+    public void salvarChamada(Long turmaId, String dataChamadaStr, Map<String, String> statusPresencaMap) {
 
-        logger.info("Iniciando salvamento de chamada para turma ID: {}", turmaId);
 
         Turma turma = turmaRepository.findById(turmaId)
                 .orElseThrow(() -> new RuntimeException("Turma não encontrada! ID: " + turmaId));
 
-        String dataStr = statusPresencaMap.get("dataChamada");
-        LocalDate dataChamada = (dataStr != null && !dataStr.isEmpty()) ? LocalDate.parse(dataStr) : LocalDate.now();
+        LocalDate dataChamada = (dataChamadaStr != null && !dataChamadaStr.isEmpty())
+                ? LocalDate.parse(dataChamadaStr)
+                : LocalDate.now();
 
         Chamada chamada = new Chamada();
         chamada.setDataChamada(dataChamada);
         chamada.setTurma(turma);
+
+        Chamada chamadaSalva = chamadaRepository.save(chamada);
+
 
         for (Map.Entry<String, String> entry : statusPresencaMap.entrySet()) {
 
             String chave = entry.getKey();
             String status = entry.getValue();
 
-            if (!chave.startsWith("presenca_") || status.isEmpty()) {
+            if (chave.equals("turmaSelecionadaId") || chave.equals("dataChamada") || !chave.startsWith("presenca_") || status.isEmpty()) {
                 continue;
             }
 
@@ -58,28 +66,28 @@ public class ChamadaImpl implements ChamadaService{
             try {
                 educandoId = Long.parseLong(chave.substring("presenca_".length()));
             } catch (NumberFormatException e) {
-                logger.warn("Chave de parâmetro inválida ignorada: {}", chave);
                 continue;
             }
 
-            logger.debug("Processando educando ID: {} com status: {}", educandoId, status);
 
             Educando educando = educandoRepository.findById(educandoId)
                     .orElseThrow(() -> new RuntimeException("Educando não encontrado: " + educandoId));
 
-            if (status.equalsIgnoreCase("P")){
+            if ("P".equalsIgnoreCase(status)){
+
                 educando.setQuantidadePresencas(educando.getQuantidadePresencas() + 1);
                 educandoRepository.save(educando);
             }
 
+
             ChamadaItem item = new ChamadaItem();
             item.setPresenca(status);
             item.setEducando(educando);
-            item.setChamada(chamada);
+
+            item.setChamada(chamadaSalva);
 
             chamadaItemRepository.save(item);
         }
-        logger.info("Salvamento de chamada concluído com sucesso.");
     }
 
 }

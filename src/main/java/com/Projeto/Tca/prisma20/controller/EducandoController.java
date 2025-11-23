@@ -1,7 +1,6 @@
 package com.Projeto.Tca.prisma20.controller;
 
 import com.Projeto.Tca.prisma20.model.Educando;
-import com.Projeto.Tca.prisma20.model.Turma;
 import com.Projeto.Tca.prisma20.service.educando.EducandoImpl;
 import com.Projeto.Tca.prisma20.service.turma.TurmaImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes; // Import adicionado
 
 @Controller
 @RequestMapping("/educandos")
@@ -36,7 +36,6 @@ public class EducandoController {
 
     @GetMapping("/deletar/{id}")
     public String deletarEducando(@PathVariable("id") Long id) {
-
         educandoImpl.deletarEducando(id);
 
         return "redirect:/educandos";
@@ -53,12 +52,20 @@ public class EducandoController {
     }
 
     @PostMapping
-    public String salvarEducando(@ModelAttribute("educando")Educando educando, @RequestParam(value = "file", required = false) MultipartFile file ){
+    public String salvarEducando(@ModelAttribute("educando")Educando educando,
+                                 @RequestParam(value = "file", required = false) MultipartFile file,
+                                 RedirectAttributes attributes) {
 
         try {
             educandoImpl.salvarEducando(educando, file);
+            attributes.addFlashAttribute("mensagemSucesso", "Educando salvo com sucesso!");
         } catch (Exception e) {
             e.printStackTrace();
+            attributes.addFlashAttribute("mensagemErro", "Erro ao salvar educando: " + e.getMessage());
+
+            if (educando.getId() != null) {
+                return "redirect:/educandos/editar/" + educando.getId();
+            }
             return "redirect:/educandos/novoEducando";
         }
 
@@ -68,9 +75,10 @@ public class EducandoController {
     @GetMapping("/editar/{id}")
     public String editarEducando(@PathVariable(name = "id") Long idEducando, Model model){
         Educando educando = educandoImpl.acharEducandoPorId(idEducando);
+
         model.addAttribute("educando", educando);
+        model.addAttribute("listaDeTurmas", turmaImpl.listarTurmas());
 
-        return "redirect:/educandos";
+        return "cadastro-educandos";
     }
-
 }

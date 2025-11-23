@@ -22,7 +22,6 @@ public class LoginController {
 
     @GetMapping("/login")
     public String fazerLogin(Model model){
-        logger.debug("Acessando a página de login.");
         RequisicaoLogin reqLogin = new RequisicaoLogin();
 
         model.addAttribute("reqLogin", reqLogin);
@@ -35,14 +34,10 @@ public class LoginController {
         String compararEmail = loginReq.getEmailReq();
         String compararSenha = loginReq.getSenhaReq();
 
-        logger.info("Tentativa de login recebida para o email: {}", compararEmail);
 
         if (loginimpl.autenticar(compararEmail, compararSenha)){
-            //session.setAttribute("usuarioLogado", loginReq.getEmailReq());
-            logger.info("Login bem-sucedido. Redirecionando para /index.");
             return "redirect:/index";
         } else {
-            logger.warn("Login falhou para o email: {}. Credenciais inválidas.", compararEmail);
             model.addAttribute("erroLogin", "E-mail ou senha inválidos. Tente novamente.");
             model.addAttribute("reqLogin", loginReq);
             return "login";

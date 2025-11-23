@@ -70,26 +70,24 @@
                         <h3 class="fw-bold">Olá, Cris!</h3>
                         <p class="text-secondary mb-0">Suas turmas estão lhe esperando.</p>
                     </div>
-                    <img src="/images/Teacher-cuate.svg" alt="" style="width: 250px; height: 250px; object-fit: contain;">
+                    <img src="/images/Programmer-pana.svg" alt="" style="width: 250px; height: 250px; object-fit: contain;">
                 </div>
             </div>
 
 
             <div class="carousel-wrapper mb-5">
+                <h4 class="mb-3 mt-4">Minhas Turmas</h4>
                     <div class="carousel-container">
                         
                         <button class="carousel-button" onclick="scrollCarousel('prev')">
                             <i class="bi bi-chevron-left"></i>
                         </button>
 
-                        <h4 class="mb-3 mt-4">Minhas Turmas </h4>
                         <div class="class-carousel" id="classCarousel">
-                            <div class="class-card bg-primary-dark">
                                 <a  th:each="turma : ${turmas}"
-                                    th:href="@{/educandos(turmaId=${turma.id})}" class="class-card-link bg-primary-dark">
+                                    th:href="@{/educandos(turmaId=${turma.id})}" class="class-card bg-primary-dark">
                                     <p th:text="${turma.nome}"></p>
                                 </a>
-                            </div>
                         </div>
 
                         <button class="carousel-button" onclick="scrollCarousel('next')">

@@ -48,7 +48,7 @@
 
     <aside id="sidebar">
         <div class="titulo-pagina">
-            <h3><a href="index.html">PRISMA</a></h3>
+            <h3><a th:href="@{/index}">PRISMA</a></h3>
         </div>
         <hr>
         <div class="text-sumario">
@@ -82,7 +82,7 @@
                         <label for="selectTurma" class="form-label fw-bold">Turma selecionada:</label>
                         <select id="selectTurma" name="turmaId" class="form-select" onchange="this.form.submit()">
                             <option value="0"
-                                    th:selected="${turmaSelecionadaId == null || turmaSelecionadaId == 0}">
+                                    th:selected="${turmaSelecionadaId == null}">
                                 Selecione uma Turma...
                             </option>
 
@@ -115,40 +115,32 @@
                 <div class="table-responsive mt-4">
                     <table class="table table-hover table-striped table-educandos">
                         <thead>
-                        <tr th:each="educando : ${listaEducandos}">
+                        <tr>
                             <th scope="col"><p class="ms-3" style="text-align: center;">Foto</p></th>
                             <th scope="col"><p class="ms-3" style="text-align: center;">Nome completo</p></th>
                             <th scope="col"><p class="ms-3" style="text-align: center;">Matrícula</p></th>
-                            <th scope="col"><p class="ms-3" style="text-align: center;">Observações</p></th>
                             <th scope="col"><p class="ms-3" style="text-align: center;">Chamada</p></th>
                         </tr>
                         </thead>
 
 
                         <tbody>
-                        <tr>
+                        <tr  th:each="educando : ${listaEducandos}">
                             <td>
-                                <img src="https://placehold.co/30x30/f59e0b/fff?text=nome" class="rounded-circle"
-                                     alt="Foto de Perfil" style="object-fit: cover;">
+                                <img th:src="${educando.caminhoImagem != null ? educando.caminhoImagem : 'https://placehold.co/40x40/ddd/555?text=NA'}"
+                                     alt="Foto"
+                                     class="rounded-circle"
+                                     style="width: 40px; height: 40px; object-fit: cover;">
                             </td>
-                            <td th:text="${educando.nome}">Nome completo do Educando</td>
-                            <td th:text="${educando.matricula}">000000</td>
-                            <td>
-                                <p class="w-75 ms-5" style="text-align: justify;">
-                                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque minus non
-                                    deserunt
-                                    excepturi iusto hic nostrum beatae. Ipsa reiciendis repudiandae asperiores
-                                    natus,
-                                    enim qui quidem blanditiis, sapiente iste, dolorem perspiciatis!
-                                </p>
-                            </td>
+                            <td th:text="${educando.nome}"></td>
+                            <td th:text="${educando.id}"></td>
                             <td>
                                 <select th:id="'presenca_' + ${educando.id}"
                                         th:name="'presenca_' + ${educando.id}"
                                         class="form-select me-2 w-100">
-                                    <option value="P" selected>P (Presente)</option>
-                                    <option value="F">F (Falta)</option>
-                                    <option value="FJ">FJ (Falta Justificada)</option>
+                                    <option value="P" selected>P</option>
+                                    <option value="F">F</option>
+                                    <option value="FJ">FJ</option>
                                 </select>
                             </td>
                         </tr>

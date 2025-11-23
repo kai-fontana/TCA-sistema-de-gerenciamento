@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/css/style.css">
 
-    <title>Prisma - Cadastro de Educando</title>
+    <title th:text="${educando.id == null ? 'Prisma - Cadastro de Educando' : 'Prisma - Edição de Educando'}"></title>
 
 </head>
 
@@ -60,25 +60,39 @@
     <main class="main-container p-4">
 
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h3 class="mb-0 fw-bold">Cadastro de novo educando</h3>
+            <h3 class="mb-0 fw-bold" th:text="${educando.id == null ? 'Cadastro de novo educando' : 'Editar educando: ' + educando.nome}"></h3>
             <a th:href="@{/educandos}" class="btn btn-outline-secondary d-flex align-items-center">
                 <i class="bi bi-arrow-left me-2"></i> Voltar
             </a>
         </div>
 
+        <div th:if="${mensagemSucesso}" class="alert alert-success alert-dismissible fade show" role="alert">
+            [[${mensagemSucesso}]]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div th:if="${mensagemErro}" class="alert alert-danger alert-dismissible fade show" role="alert">
+            [[${mensagemErro}]]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+
         <div class="card shadow-sm p-5">
             <form th:action="@{/educandos}" th:object="${educando}" method="POST" enctype="multipart/form-data">
+
+                <input type="hidden" th:field="*{id}" th:if="${educando.id != null}">
+
                 <h5 class="mb-4 text-primary">Informações pessoais</h5>
                 <div class="row g-3">
 
                     <div class="col-12 mb-4 d-flex align-items-center">
-                        <img id="profile-preview" src="https://placehold.co/100x100/e9ecef/555?text=Foto"
+                        <img id="profile-preview"
+                             th:src="${educando.caminhoImagem != null ? educando.caminhoImagem : 'https://placehold.co/100x100/e9ecef/555?text=Foto'}"
                              class="rounded-circle me-4 shadow" alt="Pré-visualização da Foto"
-                             style="object-fit: cover;">
+                             style="width: 100px; height: 100px; object-fit: cover;">
                         <div>
                             <label for="fotoPerfil" class="form-label mb-2">Foto do educando</label>
                             <input class="form-control" type="file" id="fotoPerfil" name="file" accept="image/*">
-                            <small class="text-muted">Formatos aceitos: JPG, PNG.</small>
+                            <small class="text-muted">Formatos aceitos: JPG, PNG. Deixe em branco para manter a foto atual.</small>
                         </div>
                     </div>
 
@@ -129,24 +143,26 @@
     </main>
 </div>
 
-
-<!-- PRA MOSTRA A FOTO
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-<script src="script.js"></script>
-<script>
 
-    document.getElementById('fotoPerfil').addEventListener('change', function (event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                document.getElementById('profile-preview').src = e.target.result;
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const fotoPerfilInput = document.getElementById('fotoPerfil');
+        const profilePreview = document.getElementById('profile-preview');
+
+        fotoPerfilInput.addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    profilePreview.src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            } else {
+
             }
-            reader.readAsDataURL(file);
-        } else {
-            document.getElementById('profile-preview').src = "https://placehold.co/100x100/e9ecef/555?text=Foto";
-        }
-    });-->
+        });
+    });
 </script>
 </body>
 

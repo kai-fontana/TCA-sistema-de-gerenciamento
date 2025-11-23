@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/index")
 @SessionAttributes("turmaSelecionadaId")
 public class TelaInicialController {
-    private static final Logger logger = LoggerFactory.getLogger(TelaInicialController.class);
 
     @Autowired
     TelaInicialImpl telaInicialImpl;
@@ -22,17 +21,13 @@ public class TelaInicialController {
     public String exibirTurmas(Model model, @RequestParam(value = "turmaId", required = false) Integer turmaIdParam){
 
         if (turmaIdParam != null && turmaIdParam != 0) {
-            model.addAttribute("turmaSelecionadaId", turmaIdParam);
             return "redirect:/educandos";
         }
 
         try {
-            logger.info("Carregando todas as turmas...");
-            model.addAttribute("turmas", telaInicialImpl.pegarTodasTurmas()); // <--- A falha está provavelmente aqui!
-            logger.info("Turmas carregadas com sucesso. Renderizando view 'index'.");
+            model.addAttribute("turmas", telaInicialImpl.pegarTodasTurmas());
         } catch (Exception e) {
-            logger.error("ERRO ao carregar turmas para a página inicial: {}", e.getMessage(), e);
-            model.addAttribute("turmas", new java.util.ArrayList<>()); // Evita quebra do Thymeleaf
+            model.addAttribute("turmas", new java.util.ArrayList<>());
         }
 
         return "index";

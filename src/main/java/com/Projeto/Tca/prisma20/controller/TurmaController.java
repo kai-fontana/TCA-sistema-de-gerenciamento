@@ -34,8 +34,6 @@ public class TurmaController {
     @PostMapping
     public String salvarTurma(@ModelAttribute("turma") Turma turma){
 
-        System.out.println("Nome da Turma Recebida: " + turma.getNome());
-
         try {
             turmaImpl.salvarTurma(turma);
         } catch (Exception e) {
@@ -46,9 +44,8 @@ public class TurmaController {
         return "redirect:/turmas";
     }
 
-    @GetMapping("/deletar/{id}") // URL: /turmas/deletar/{id}
+    @GetMapping("/deletar/{id}")
     public String deletarTurma(@PathVariable("id") Long id) {
-
         turmaImpl.deletarTurma(id);
 
         return "redirect:/turmas";

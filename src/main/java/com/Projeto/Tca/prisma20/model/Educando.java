@@ -8,6 +8,7 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @Entity
+@ToString(exclude = "turma")
 @Table(name = "educandos")
 public class Educando {
     @Id
