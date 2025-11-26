@@ -66,7 +66,7 @@ We tested and observed the functionality of all our application's features, simp
 The development of any system presents challenges. The main obstacles and the solutions implemented were:
 
 * **Difficulty:** **Complex Object-Relational Mapping (ORM):** Dealing with the relationships between entities (Students, Classes, Attendance, Frequency) in PostgreSQL via JPA/Hibernate.
-    * **Solution:** Clear definition of primary and foreign keys and the correct use of `@OneToMany`, `@ManyToOne`, and `@ManyToMany` annotations in Java, ensuring data integrity and query performance.
+* **Solution:** Clear definition of primary and foreign keys and the correct use of `@OneToMany`, `@ManyToOne`, and `@ManyToMany` annotations in Java, ensuring data integrity and query performance.
 
 ---
 
@@ -122,6 +122,10 @@ This journey brought us valuable professional experience and learnings that go f
 
 For future versions, we suggest the following expansions and optimizations:
 * **Automatic Notifications:** Add a system for sending emails or SMS notifications to guardians in cases of unjustified absences.
+* **Multi-user:** Administrator and Educator
+* User registration/User creation;
+* **Class/Group** editing;
+* Reports of students and **attendance/roll call**.
 
 ---
 
@@ -132,5 +136,6 @@ The project was developed by the team:
 * Kaillanny Fontana dos Santos
 * Luis Castro
 * Marcos Yuri Rosa de Oliveira
+
 
 
