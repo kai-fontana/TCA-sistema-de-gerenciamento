@@ -38,7 +38,8 @@ The project utilizes the following dependencies:
 
 The development of Prisma 2.0 followed a well-defined cycle, progressing through the following stages:
 
-<img width="1049" height="321" alt="print-timeline" src="https://github.com/user-attachments/assets/6ec0403d-bcfc-408b-80b5-6a5fd9f264d0" />
+<img width="1042" height="316" alt="image" src="https://github.com/user-attachments/assets/4f60330b-7b71-49be-860f-6291267ba489" />
+
 
 ### 1. Planning
 In this phase, we analyzed the functionalities of the legacy system and gathered all **requirements** together with CESMAR. We defined the **MVC architecture** and chose the technologies (Java, Spring Boot, PostgreSQL) based on robustness and scalability. The project scope was detailed, resulting in the 4 main pages and their functionalities.
@@ -136,6 +137,7 @@ The project was developed by the team:
 * Kaillanny Fontana dos Santos
 * Luis Castro
 * Marcos Yuri Rosa de Oliveira
+
 
 
 
