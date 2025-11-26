@@ -65,8 +65,6 @@ We tested and observed the functionality of all our application's features, simp
 
 The development of any system presents challenges. The main obstacles and the solutions implemented were:
 
-* **Difficulty:** **Thymeleaf Integration with Spring Security (Authentication):** Ensuring that security (login and access control) worked smoothly with the *view engine*.
-    * **Solution:** Detailed study and application of Thymeleaf's security tags and granular configuration of Spring Security, ensuring that only authenticated users could access internal routes.
 * **Difficulty:** **Complex Object-Relational Mapping (ORM):** Dealing with the relationships between entities (Students, Classes, Attendance, Frequency) in PostgreSQL via JPA/Hibernate.
     * **Solution:** Clear definition of primary and foreign keys and the correct use of `@OneToMany`, `@ManyToOne`, and `@ManyToMany` annotations in Java, ensuring data integrity and query performance.
 
@@ -125,7 +123,6 @@ This journey brought us valuable professional experience and learnings that go f
 For future versions, we suggest the following expansions and optimizations:
 * **Advanced Reports Module:** Implement the generation of customized reports (PDF/Excel) on attendance, performance per class, and annual indicators.
 * **Automatic Notifications:** Add a system for sending emails or SMS notifications to guardians in cases of unjustified absences.
-* **External System Integration:** Prepare the architecture for future integration with other CESMAR management systems, such as financial or pedagogical modules.
 
 ---
 
@@ -136,3 +133,4 @@ The project was developed by the team:
 * Kaillanny Fontana dos Santos
 * Luis Castro
 * Marcos Yuri Rosa de Oliveira
+
