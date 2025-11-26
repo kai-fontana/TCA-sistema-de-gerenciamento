@@ -121,7 +121,6 @@ This journey brought us valuable professional experience and learnings that go f
 ## 💡 Possible Future Improvements
 
 For future versions, we suggest the following expansions and optimizations:
-* **Advanced Reports Module:** Implement the generation of customized reports (PDF/Excel) on attendance, performance per class, and annual indicators.
 * **Automatic Notifications:** Add a system for sending emails or SMS notifications to guardians in cases of unjustified absences.
 
 ---
@@ -133,4 +132,5 @@ The project was developed by the team:
 * Kaillanny Fontana dos Santos
 * Luis Castro
 * Marcos Yuri Rosa de Oliveira
+
 
