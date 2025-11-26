@@ -122,11 +122,11 @@ This journey brought us valuable professional experience and learnings that go f
 ## 💡 Possible Future Improvements
 
 For future versions, we suggest the following expansions and optimizations:
-* **Automatic Notifications:** Add a system for sending emails or SMS notifications to guardians in cases of unjustified absences.
-* **Multi-user:** Administrator and Educator
-* User registration/User creation;
-* **Class/Group** editing;
-* Reports of students and **attendance/roll call**.
+* **Automatic Notifications:** Add a system for sending emails or SMS notifications to guardians in cases of unjustified absences;
+* **Multi-user:** Administrator and Educator;
+* **User registration:** Adding a sing up page;
+* **Class/Group:** Editing the class;
+* **Roll call:** Reports of students and attendance.
 
 ---
 
@@ -137,6 +137,7 @@ The project was developed by the team:
 * Kaillanny Fontana dos Santos
 * Luis Castro
 * Marcos Yuri Rosa de Oliveira
+
 
 
 
