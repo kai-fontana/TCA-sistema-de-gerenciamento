@@ -138,6 +138,7 @@ The project was developed by the team:
 * Luis Castro
 * Marcos Yuri Rosa de Oliveira
 
+Canva link: https://www.canva.com/design/DAG45SW1Ark/58petbvRM8i50wZxnr6eUQ/edit?utm_content=DAG45SW1Ark&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 
 
 
